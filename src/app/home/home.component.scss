@@ -1,0 +1,17 @@
+:host{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  color: white;
+  background: linear-gradient(to bottom, #314a5d 0%,#273848 48%,#172331 100%);
+
+  .logo{
+    position: absolute;
+    font-size: 24px;
+    top: 0;
+    left: 0;
+    margin: 16px 0 0 24px;
+  }
+}

@@ -1,0 +1,28 @@
+.back-to-list-title {
+  margin: 10px 0 20px 0;
+
+  .back-button {
+    color: #248cf1;
+    font-size: 18px;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 10px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .title {
+    color: #343434;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0;
+    display: inline-block;
+    line-height: 22px;
+    margin: 0;
+  }
+}

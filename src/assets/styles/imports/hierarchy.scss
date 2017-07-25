@@ -1,0 +1,51 @@
+@import "variables";
+
+.hierarchy {
+  ul {
+    padding: 0;
+
+    li {
+      list-style: none outside none;
+      padding: 5px 0 6px 0;
+    }
+
+    .level-title {
+      position: relative;
+      padding: 5px 5px 6px 48px;
+      word-break: break-word;
+
+      i.arrow {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid $secondary-color;
+        position: absolute;
+        left: 28px;
+        top: 12px;
+      }
+    }
+
+    .second-level {
+      li {
+        cursor: pointer;
+        padding: 2px 5px 2px 56px;
+        word-break: break-word;
+
+        &.selected {
+          background: $selected-color;
+        }
+
+        &.disabled {
+          background: none;
+          color: #ccc;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .selected {
+    background: $selected-color;
+  }
+}

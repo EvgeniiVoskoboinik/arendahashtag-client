@@ -1,0 +1,50 @@
+@import "variables";
+
+.dropdown {
+  button {
+    background: $background-control-color;
+    border: solid 1px $border-control-color;
+    color: $text-color;
+    position: relative;
+    padding-right: 50px;
+    width: 100%;
+    text-align: left;
+
+    i.arrow {
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid $text-color;
+      position: absolute;
+      right: 10px;
+      top: 13px;
+    }
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+
+    li {
+      cursor: pointer;
+      color: $text-color;
+      padding: 5px 5px 6px 12px;
+
+      &.selected {
+        background: $background-control-color;
+      }
+
+      &:hover {
+        background: $background-control-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@import "variables";
+
+.add-entity-field {
+  position: relative;
+
+  input {
+    width: 100%;
+    padding-right: 30px;
+  }
+
+  button {
+    color: $border-control-color;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    width: 30px;
+    padding: 0 0 2px 0;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 30px;
+
+    &:hover,
+    &:active {
+      background-image: none;
+      box-shadow: none;
+    }
+  }
+
+  &.divided {
+    input {
+      padding-right: 10px;
+      width: 500px;
+    }
+
+    button {
+      position: relative;
+      vertical-align: bottom;
+    }
+  }
+}
+
+.entity-line {
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 2px;
+
+  .entity-content {
+    padding-right: 7px;
+  }
+
+  a {
+    display: none;
+
+    i {
+      color: $hover-tool-color;
+      font-size: 12px;
+
+      &:hover {
+        color: $indigo;
+      }
+    }
+
+    &.edit {
+      margin-right: 10px;
+    }
+
+    &.delete {
+      margin-right: 5px;
+    }
+  }
+
+  &:hover {
+    background: $hover-background-color;
+
+    a {
+      display: inline;
+    }
+  }
+}

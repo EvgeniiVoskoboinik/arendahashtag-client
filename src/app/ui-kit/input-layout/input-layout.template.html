@@ -1,0 +1,20 @@
+<p *ngIf="caption" class="caption">
+    <span>{{ caption }}</span>
+    <span class="required" *ngIf="required">*</span>
+</p>
+<div class="input-block"
+     [class.error]="error"
+>
+    <ng-content></ng-content>
+    <i *ngIf="icon" class="fa" [ngClass]="icon"></i>
+    <div *ngIf="description" class="description">
+        <span>{{ description }}</span>
+        <span *ngIf="!description">&nbsp;</span>
+    </div>
+    <div *ngIf="error" class="error-message">
+        <span>{{ error }}</span>
+    </div>
+    <div [hidden]="!errors" class="error-message" *ngFor="let error of errors">
+        <span>{{ error }}</span>
+    </div>
+</div>

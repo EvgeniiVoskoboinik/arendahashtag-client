@@ -1,0 +1,55 @@
+@import "variables";
+
+/*
+  Until we use bootstrap on some pages we need to clean
+  bootstrap styles for newly created pages to prevent style conflicts.
+  As soon as we migrate to new style guide completely
+  we can remove this clean-fixes from this styles
+
+  TODO: Remove clean-fixes after migrate from Bootstrap
+ */
+
+// Clean fixes
+p {
+  margin-bottom: 4px;
+}
+
+// Behavox typography
+.code {
+  padding: 20px 24px;
+  background: #f5f5f5;
+  color: $violet-text-color;
+}
+
+.info-number {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.67;
+  margin: 0 0 16px 0;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.33;
+  margin: 24px 0 16px 0px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.33;
+  margin: 24px 0 16px 0px;
+}
+
+.beh-label {
+  font-size: 11px;
+  line-height: 1.5;
+  color: $secondary-color;
+}

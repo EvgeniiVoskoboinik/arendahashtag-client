@@ -1,0 +1,94 @@
+@import "./variables";
+
+$map: ("": $padding, "-s": $padding-s, "-m": $padding-m, "-l": $padding-l);
+
+@mixin padding($suffix) {
+  .padding#{$suffix} {
+    padding: map-get($map, $suffix);
+  }
+
+  .padding-side#{$suffix} {
+    padding-left: map-get($map, $suffix);
+    padding-right: map-get($map, $suffix);
+  }
+
+  .padding-top#{$suffix} {
+    padding-top: map-get($map, $suffix);
+  }
+
+  .padding-bottom#{$suffix} {
+    padding-bottom: map-get($map, $suffix);
+  }
+}
+
+@include padding("");
+@include padding("-s");
+@include padding("-m");
+@include padding("-l");
+
+.flex {
+  display: flex;
+
+  &.center {
+    align-items: center;
+  }
+
+  & > .flex-full {
+    flex: 1;
+  }
+}
+
+.card {
+  border-radius: 3px;
+  background-color: $card-color;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+  .tab-content {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+}
+
+@mixin verticalSpacing($suffix) {
+  &.spacing#{$suffix} {
+    & > * + * {
+      margin-top: map-get($map, $suffix);;
+    }
+  }
+}
+
+@mixin horizontalSpacing($suffix) {
+  &.spacing#{$suffix} {
+    & > * + * {
+      margin-left: map-get($map, $suffix);
+    }
+  }
+}
+
+.vertical-layout {
+  & > * + * {
+    margin-top: $padding-s;
+  }
+
+  @include verticalSpacing("");
+  @include verticalSpacing("-s");
+  @include verticalSpacing("-m");
+  @include verticalSpacing("-l");
+}
+
+.horizontal-layout {
+  display: flex;
+
+  & > * + * {
+    margin-left: $padding;
+  }
+
+  @include horizontalSpacing("");
+  @include horizontalSpacing("-s");
+  @include horizontalSpacing("-m");
+  @include horizontalSpacing("-l");
+}
+
+@mixin border-bottom {
+  border-bottom: solid 1px $background-control-color;
+}

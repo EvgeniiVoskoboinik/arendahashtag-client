@@ -1,0 +1,58 @@
+@import "../../../assets/styles/imports/variables";
+@import "../../../assets/styles/imports/input-variables";
+
+:host {
+  display: block;
+  /deep/ input{
+    color: $text-color;
+  }
+
+  .caption {
+    font-size: 12px;
+    line-height: 1.5;
+
+    & > span.required {
+      color: $error-control-color;
+      padding-left: 4px;
+    }
+  }
+
+  .input-block {
+    & > i {
+      color: $main-color;
+      margin-left: -26px;
+    }
+
+    &.error /deep/ {
+      @include inputs() {
+        @include input-error();
+      }
+    }
+  }
+
+  .description {
+    color: $secondary-color;
+    font-size: 11px;
+    line-height: 1.45;
+    padding-top: 4px;
+    padding-left: 13px;
+  }
+
+  &.horizontal {
+    display: flex;
+    padding: 2px 0;
+
+    .caption {
+      width: 120px;
+      font-size: 14px;
+      margin-right: 16px;
+      margin-bottom: 0;
+    }
+  }
+
+  .error-message {
+    @extend .description;
+    color: $error-control-color;
+  }
+}
+

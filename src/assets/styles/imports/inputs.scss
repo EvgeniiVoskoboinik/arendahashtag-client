@@ -1,0 +1,30 @@
+@import "variables";
+@import "input-variables";
+
+@include inputs() {
+  width: 100%;
+  padding: 5px 12px;
+  font-size: 14px;
+
+  @include input-base();
+
+  &:hover {
+    @include input-hover();
+  }
+
+  &:focus {
+    @include input-focus();
+  }
+
+  &::placeholder {
+    color: $secondary-color;
+  }
+
+  &[disabled] {
+    background-color: $background-control-color;
+  }
+
+  &.error {
+    @include input-error();
+  }
+}

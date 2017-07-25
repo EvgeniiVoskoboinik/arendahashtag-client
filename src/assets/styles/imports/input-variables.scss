@@ -1,0 +1,35 @@
+@import "variables";
+
+$input-background-color: #fff;
+$input-border-radius: 3px;
+$input-border: solid 1px $border-control-color;
+
+@mixin input-base() {
+  transition: border-color 250ms;
+  outline: none;
+  border-radius: $input-border-radius;
+  background-color: $input-background-color;
+  border: $input-border;
+}
+
+@mixin input-hover() {
+  border-color: $secondary-color;
+}
+
+@mixin input-focus() {
+  border-color: $main-color;
+}
+
+@mixin input-error() {
+  border-color: $error-control-color;
+}
+
+@mixin inputs() {
+  input:not([type]),
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    @content;
+  }
+}

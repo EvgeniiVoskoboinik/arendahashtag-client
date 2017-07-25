@@ -1,0 +1,59 @@
+@import "variables";
+
+button {
+  padding: 5px 16px 6px 16px;
+  background-image: linear-gradient(to bottom, #3f5d6f, $main-color);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  line-height: 1.5;
+  transition: box-shadow 250ms, background-image 250ms;
+
+  &:hover {
+    background-image: linear-gradient(to bottom, #4c697b, #3b5569);
+    box-shadow: 0 2px 2px 0 rgba(140, 140, 140, 0.5);
+  }
+
+  &:active {
+    background-image: linear-gradient(to bottom, #3f5d6f, $main-color);
+    box-shadow: inset 0 1px 5px 0 rgba(26, 26, 26, 0.5);
+  }
+
+  &.ghost {
+    background: #FFF;
+    border: solid 1px $main-color;
+    color: $main-color;
+    transition: none;
+
+    &:hover {
+      color: white;
+      background-image: linear-gradient(to bottom, #4c697b, #3b5569);
+      box-shadow: 0 2px 2px 0 rgba(140, 140, 140, 0.5);
+    }
+
+    &:active {
+      background-image: linear-gradient(to bottom, #3f5d6f, $main-color);
+      box-shadow: inset 0 1px 5px 0 rgba(26, 26, 26, 0.5);
+    }
+  }
+
+  &.icon {
+    padding: 5px 11px 6px 11px;
+    background: $background-control-color;
+    color: $link-color;
+  }
+
+  &[disabled] {
+    background: whitesmoke;
+    color: $secondary-color;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+}

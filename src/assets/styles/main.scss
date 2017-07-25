@@ -1,0 +1,13 @@
+@import "imports/variables";
+@import "imports/buttons";
+@import "imports/inputs";
+@import "imports/dropdowns";
+
+html, body{
+  font-family: "Open Sans";
+
+  h1{
+    font-size: 55px;
+    font-weight: 200;
+  }
+}
