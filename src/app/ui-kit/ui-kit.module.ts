@@ -6,6 +6,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputLayoutComponent} from './input-layout/input-layout.component';
 import {SearchSelectComponent} from './search-select/search-select.component';
 import {OffClickDirective} from './search-select/off-click';
+import {TabsetComponent} from './tabset/tabset.component';
+import {TabComponent} from './tabset/tab/tab.component';
 
 @NgModule({
   imports: [
@@ -17,13 +19,17 @@ import {OffClickDirective} from './search-select/off-click';
   declarations: [
     InputLayoutComponent,
     SearchSelectComponent,
-    OffClickDirective
+    OffClickDirective,
+    TabsetComponent,
+    TabComponent,
   ],
   entryComponents: [],
   exports: [
     InputLayoutComponent,
     SearchSelectComponent,
-    OffClickDirective
+    OffClickDirective,
+    TabsetComponent,
+    TabComponent,
   ]
 })
 

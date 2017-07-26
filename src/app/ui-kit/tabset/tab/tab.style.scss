@@ -1,0 +1,40 @@
+@import "../../../../assets/styles/imports/variables";
+
+:host {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 200;
+  color: #c7c7c7;
+
+  &:hover{
+    color: #ffffff;
+  }
+
+  & > span.active {
+    color: #ffffff;
+  }
+}
+
+/deep/ app-tab + app-tab {
+  margin-left: $padding;
+}
+
+.light {
+  & > :host {
+    font-weight: 400;
+  }
+}
+
+.fluid {
+  & > :host {
+    flex: 1;
+
+    & > span {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

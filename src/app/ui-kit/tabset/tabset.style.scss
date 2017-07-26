@@ -1,0 +1,33 @@
+@import "../../../assets/styles/imports/variables";
+
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 56px;
+
+  .selector {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: left 350ms, width 350ms;
+  }
+
+  &.light {
+    & .selector {
+      height: 1px;
+    }
+  }
+
+  &.border {
+    border-bottom: solid 1px $border-color;
+  }
+
+  /deep/ &.light {
+    app-tab {
+      font-weight: 400;
+    }
+  }
+}

@@ -3,4 +3,8 @@
   <h1>Привет</h1>
 </div>
 
-
+<app-tabset
+  (select)="onTabSelected($event)">
+  <app-tab *ngFor="let tab of tabs"
+           [key]="tab.key">{{ tab.name }}</app-tab>
+</app-tabset>
