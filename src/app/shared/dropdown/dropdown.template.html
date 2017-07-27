@@ -21,6 +21,7 @@
   <div class="dropdown-menu" role="menu" *dropdownMenu>
     <div class="dropdown-search"
          *ngIf="searching"
+         (click)="$event.stopPropagation();"
     >
       <input #searchInput type="text" name="search" placeholder="Search..." autocomplete="off"
              [(ngModel)]="search"

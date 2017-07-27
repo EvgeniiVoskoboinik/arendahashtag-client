@@ -11,7 +11,7 @@ import {
 import {TabComponent} from './tab/tab.component';
 import {Observable, ReplaySubject} from 'rxjs';
 
-const ACTIVE_FONT = '24px Open Sans';
+const ACTIVE_FONT = '32px Open Sans';
 
 @Component({
                selector: 'app-tabset',

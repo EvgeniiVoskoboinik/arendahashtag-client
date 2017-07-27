@@ -6,3 +6,57 @@
   <app-tab *ngFor="let tab of tabs"
            [key]="tab.key">{{ tab.name }}</app-tab>
 </app-tabset>
+
+<div class="form-container">
+  <div class="form-item">
+    <h4>Населенный пункт</h4>
+    <app-dropdown
+      [searching]="true"
+      [clientSearching]="true"
+      [items]="cities"
+      [(selected)]="selectedCities"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <h4>Тип объявления</h4>
+    <app-dropdown
+      [items]="adTypes"
+      [(selected)]="selectedAdTypes"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <h4>Вид недвижимости</h4>
+    <app-dropdown
+      [items]="propertyTypes"
+      [(selected)]="selectedPropertyTypes"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <h4>Количество комнат</h4>
+    <app-dropdown
+      [multiselection]="selectedTab.key === 'find'"
+      [items]="roomsCount"
+      [(selected)]="selectedRoomsCounts"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <h4>Срок аренды</h4>
+    <app-dropdown
+      [items]="leaseTerms"
+      [(selected)]="selectedLeaseTerms"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <h4>Кто разместил</h4>
+    <app-dropdown
+      [multiselection]="selectedTab.key === 'find'"
+      [items]="advertiserTypes"
+      [(selected)]="selectedAdvertiserTypes"
+    ></app-dropdown>
+  </div>
+</div>

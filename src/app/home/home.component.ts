@@ -1,12 +1,9 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import {HOME_ANIMATIONS} from './home.animation';
+import {AdStateItem} from '../shared/interfaces/common';
+import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
 
-interface SelectionItem {
-  id: string;
-  text: string;
-}
-
-export type TabKey = string | number;
+export type TabKey = string;
 
 export interface Tab {
   name: string;
@@ -22,17 +19,19 @@ export interface Tab {
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  items: SelectionItem[] = [
-    {
-      id: 'msk',
-      text: 'msk'
-    },
-    {
-      id: 'spb',
-      text: 'spb'
-    }
-  ];
-  selectedItem: SelectionItem = this.items[0];
+  cities = CITIES;
+  adTypes = AD_TYPES;
+  propertyTypes = PROPERTY_TYPES;
+  advertiserTypes = ADVERTISER_TYPES;
+  leaseTerms = LEASE_TERMS;
+  roomsCount = ROOMS_COUNT;
+
+  selectedCities: AdStateItem[] = [];
+  selectedAdTypes: AdStateItem[] = [];
+  selectedPropertyTypes: AdStateItem[] = [];
+  selectedAdvertiserTypes: AdStateItem[] = [];
+  selectedLeaseTerms: AdStateItem[] = [];
+  selectedRoomsCounts: AdStateItem[] = [];
 
   tabs: Tab[] = [
     {
@@ -47,10 +46,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selectedTab: Tab = this.tabs[0];
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
-
-  updateItem(item: SelectionItem) {
-    this.selectedItem = item;
-  }
 
   onTabSelected(tab: Tab) {
     this.selectedTab = tab;
