@@ -36,15 +36,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   tabs: Tab[] = [
     {
-      key: 'create',
-      name: 'Разместить объявление'
+      key: 'find',
+      name: 'Найти объявление',
     },
     {
-      key: 'find',
-      name: 'Найти объявление'
+      key: 'create',
+      name: 'Разместить объявление',
     },
   ];
-  selectedTab: Tab;
+  selectedTab: Tab = this.tabs[0];
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
 

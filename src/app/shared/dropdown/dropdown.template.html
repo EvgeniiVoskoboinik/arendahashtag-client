@@ -1,0 +1,53 @@
+<div dropdown
+     [(isOpen)]="expanded">
+  <div dropdownToggle type="button" class="dropdown-toggle"
+          (click)="onToggleClick()"
+  >
+    <div class="dropdown-text"
+         [class.item-selected]="isItemSelected"
+    >
+            <span class="dropdown-text-main">
+                {{ text }}
+            </span>
+      <span class="dropdown-text-count" *ngIf="multiselection && selected.length != 0">
+                ({{ selected.length }})
+            </span>
+    </div>
+    <i class="fa caret-icon"
+       [class.fa-caret-up]="expanded"
+       [class.fa-caret-down]="!expanded"
+    ></i>
+  </div>
+  <div class="dropdown-menu" role="menu" *dropdownMenu>
+    <div class="dropdown-search"
+         *ngIf="searching"
+    >
+      <input #searchInput type="text" name="search" placeholder="Search..." autocomplete="off"
+             [(ngModel)]="search"
+             [formControl]="searchControl"
+
+             (keydown.Esc)="onSearchEsc($event)"
+      />
+      <i *ngIf="!search" class="fa fa-search search-icon" aria-hidden="true"></i>
+      <i *ngIf="search" class="fa fa-remove clear-icon" aria-hidden="true"
+         (click)="onClearSearchClick($event)"
+      ></i>
+    </div>
+    <ul #itemsList>
+      <li class="dropdown-item" role="menuitem" *ngFor="let item of visibleItems"
+          [class.selected]="isSelected(item.id)"
+
+          (click)="onItemClick(item.id, $event)"
+      >
+        <div class="dropdown-item-content">
+          {{ item.title }}
+        </div>
+      </li>
+    </ul>
+    <span class="dropdown-no-items" *ngIf="!visibleItems.length && !loading">
+            {{ search ? 'No items found' : 'No items' }}{{ searchError ? ':' : ''}} <span
+      class="dropdown-no-items-error">{{ searchError }}</span>
+        </span>
+  </div>
+
+</div>

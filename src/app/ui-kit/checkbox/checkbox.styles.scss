@@ -1,0 +1,118 @@
+@import "../../../assets/styles/imports/variables.scss";
+
+$color--border: $border-control-color;
+$color--border-focused: #c7c7c7;
+$color--border-disabled: $border-color;
+$color--main: $main-color;
+$color--main-disabled: $text-disabled-color;
+$color--bkg: #ffffff;
+$color--bkg-active: $background-control-color;
+$color--bkg-disabled: $background-control-color;
+
+:host{
+  display: inline-flex;
+}
+
+  .beh-checkbox-container{
+    font-size: 16px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle; // need it for proper allign
+
+    &:hover:not(.disabled){
+      cursor: pointer;
+    }
+
+    &.labelPresent{
+      .beh-checkbox{
+        margin: 0 0 0 .5em;
+      }
+
+      &.labelRight{
+        flex-direction: row-reverse;
+        .beh-checkbox{
+          margin: 0 .5em 0 0;
+        }
+      }
+    }
+
+    span{
+      user-select: none;
+    }
+
+    input{
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      margin: 0;
+    }
+  }
+
+  .beh-checkbox{
+    position: relative;
+    height: 16px;
+    width: 16px;
+    background: $color--bkg;
+    border: solid 1px $color--border;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .beh-checkbox-container:hover &{
+      background-color: $color--bkg-active;
+    }
+    .beh-checkbox-container input:focus ~ &,
+    .beh-checkbox-container input:checked:focus ~ &{
+      border-color: $color--border-focused;
+    }
+
+    .beh-checkbox-container input:checked ~ &{
+      background: $color--bkg;
+    }
+
+    .beh-checkbox-container:hover input:not([disabled]):checked ~ &{
+      background: $color--bkg-active;
+    }
+
+    .beh-checkbox-container input:disabled ~ &{
+      background: $color--bkg-disabled;
+      pointer-events: none;
+      border-color: $color--border-disabled;
+    }
+
+    .behicon-check{
+      font-size: 12px;
+      display: none;
+
+      .beh-checkbox-container input:checked ~ &{
+        display: block;
+        color: $color--main;
+      }
+
+      .beh-checkbox-container input:disabled ~ &{
+        color: $color--main-disabled;
+      }
+    }
+
+    &:after{
+      content: '';
+      display: none;
+
+      .beh-checkbox-container input:indeterminate ~ &{
+        display: block;
+        width: 8px;
+        border: solid $color--main;
+        border-width: 0 0 2px 0;
+      }
+
+      .beh-checkbox-container input:disabled ~ &{
+        border-color: $color--main-disabled;
+      }
+    }
+  }

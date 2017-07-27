@@ -1,10 +1,8 @@
-<div class="logo">Логотип#</div>
-<div [@fadeIn]="''" [@slideLeft]="''">
-  <h1>Привет</h1>
-</div>
+<div class="logo">Аренда#</div>
 
-<app-tabset
-  (select)="onTabSelected($event)">
+<app-tabset [@fadeIn]="''" [@slideLeft]="''"
+            [selectedKey]="selectedTab.key"
+            (select)="onTabSelected($event)">
   <app-tab *ngFor="let tab of tabs"
            [key]="tab.key">{{ tab.name }}</app-tab>
 </app-tabset>

@@ -8,6 +8,7 @@ import {SearchSelectComponent} from './search-select/search-select.component';
 import {OffClickDirective} from './search-select/off-click';
 import {TabsetComponent} from './tabset/tabset.component';
 import {TabComponent} from './tabset/tab/tab.component';
+import {CheckboxComponent} from './checkbox/checkbox.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import {TabComponent} from './tabset/tab/tab.component';
     OffClickDirective,
     TabsetComponent,
     TabComponent,
+    CheckboxComponent,
   ],
   entryComponents: [],
   exports: [
@@ -30,7 +32,8 @@ import {TabComponent} from './tabset/tab/tab.component';
     OffClickDirective,
     TabsetComponent,
     TabComponent,
-  ]
+    CheckboxComponent,
+  ],
 })
 
 export class UiKitModule {

@@ -1,6 +1,6 @@
 @import "variables";
 
-button {
+button.app-button {
   padding: 5px 16px 6px 16px;
   background-image: linear-gradient(to bottom, #3f5d6f, $main-color);
   color: white;
