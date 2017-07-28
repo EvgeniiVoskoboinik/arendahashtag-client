@@ -10,12 +10,15 @@ import {UiKitModule} from './ui-kit/ui-kit.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
+import {HeaderComponent} from './header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
 
     HomeComponent,
+    HeaderComponent,
 
     DropdownComponent,
   ],

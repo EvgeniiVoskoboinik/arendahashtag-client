@@ -25,12 +25,12 @@ export const PROPERTY_TYPES: AdStateItem[] = [
     title: 'Квартира',
   },
   {
-    id: 'room',
-    title: 'Комната',
-  },
-  {
     id: 'house',
     title: 'Дом',
+  },
+  {
+    id: 'room',
+    title: 'Комната',
   },
   {
     id: 'garage',
