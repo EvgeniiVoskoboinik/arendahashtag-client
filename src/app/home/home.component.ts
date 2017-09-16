@@ -1,7 +1,9 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import {HOME_ANIMATIONS} from './home.animation';
-import {AdStateItem} from '../shared/interfaces/common';
+import {AdState, AdStateItem} from '../shared/interfaces/common';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
+
+import {HomeApiService} from './home.api.service';
 
 export type TabKey = string;
 
@@ -16,7 +18,7 @@ export interface Tab {
   templateUrl: './home.template.html',
   styleUrls: ['./home.component.scss'],
   animations: HOME_ANIMATIONS,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
@@ -27,22 +29,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
   leaseTerms = LEASE_TERMS;
   roomsCount = ROOMS_COUNT;
 
-  selectedCity: string|number[];
-  selectedAdType: string|number[];
-  selectedLeaseTerm: string|number[];
-  selectedPropertyType: string|number[];
-  selectedRoomsCounts: string|number[] = [];
-  selectedAdvertiserTypes: string|number[] = [];
+  adState: AdState = {
+    city: null,
+    adType: null,
+    leaseTerm: null,
+    propertyType: null,
+    roomsCount: null,
+    advertiser: null,
+  };
 
   dropdownPlaceholder = 'Не выбрано';
 
   get isRentSelected(): boolean {
-    return this.selectedAdType &&
-      (this.selectedAdType[0] === AD_TYPES[0].id || this.selectedAdType[0] === AD_TYPES[1].id);
+    return this.adState.adType &&
+      (this.adState.adType[0] === AD_TYPES[0].id || this.adState.adType[0] === AD_TYPES[1].id);
   }
   get ispropertyContainsRooms(): boolean {
-    return this.selectedPropertyType &&
-      (this.selectedPropertyType[0] === PROPERTY_TYPES[0].id || this.selectedPropertyType[0] === PROPERTY_TYPES[1].id);
+    return this.adState.propertyType &&
+      (this.adState.propertyType[0] === PROPERTY_TYPES[0].id || this.adState.propertyType[0] === PROPERTY_TYPES[1].id);
   }
 
   tabs: Tab[] = [
@@ -58,14 +62,38 @@ export class HomeComponent implements OnInit, AfterViewInit {
     },
   ];
   selectedTab: Tab = this.tabs[0];
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private homeApiService: HomeApiService,
+    ) { }
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+  private postAd() {
+    this.homeApiService.post(this.adState)
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
+
+  private findAd() {
+    this.homeApiService.find(this.adState)
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
 
   onTabSelected(key: string) {
     this.selectedTab = this.tabs.find(tab => tab.key === key);
   }
 
   onSelectedChange(item: any) {
+  }
+
+  onClickNext() {
+    if (this.selectedTab.key === 'create') {
+      this.postAd();
+    } else {
+      this.findAd();
+    }
   }
 
   ngOnInit() {

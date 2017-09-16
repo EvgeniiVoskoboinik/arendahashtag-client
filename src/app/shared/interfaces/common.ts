@@ -1,13 +1,13 @@
 export interface AdStateItem{
-  id: string | number;
+  id: string;
   title: string;
 }
 
 export interface AdState{
-  adType: AdStateItem[];
-  propertyType: AdStateItem[];
-  city: AdStateItem[];
-  leaseTerm: AdStateItem[];
-  roomsCount: AdStateItem[];
-  advertiser: AdStateItem[];
+  adType: string[];
+  propertyType: string[];
+  city: string[];
+  leaseTerm: string[];
+  roomsCount: string[];
+  advertiser: string[];
 }

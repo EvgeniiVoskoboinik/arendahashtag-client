@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {HttpModule} from '@angular/http';
 
 import { routing } from './app.routes';
 
@@ -12,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
 import {HeaderComponent} from './header/header.component';
 
+import {VkApiService} from './shared/services/vk.api.service';
+import {HomeApiService} from './home/home.api.service';
 
 @NgModule({
   declarations: [
@@ -28,11 +31,15 @@ import {HeaderComponent} from './header/header.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    HttpModule,
 
     UiKitModule,
     routing,
   ],
-  providers: [],
+  providers: [
+    VkApiService,
+    HomeApiService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

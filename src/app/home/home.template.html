@@ -13,7 +13,7 @@
       [searching]="true"
       [clientSearching]="true"
       [items]="cities"
-      [(selected)]="selectedCity"
+      [(selected)]="adState.city"
     ></app-dropdown>
   </div>
   <div class="form-item"></div>
@@ -23,7 +23,7 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="adTypes"
-      [(selected)]="selectedAdType"
+      [(selected)]="adState.adType"
       (selectedChange)="onSelectedChange($event)"
 
     ></app-dropdown>
@@ -35,7 +35,7 @@
       <app-dropdown
         [placeholder]="dropdownPlaceholder"
         [items]="leaseTerms"
-        [(selected)]="selectedLeaseTerm"
+        [(selected)]="adState.leaseTerm"
       ></app-dropdown>
     </ng-container>
   </div>
@@ -45,7 +45,7 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="propertyTypes"
-      [(selected)]="selectedPropertyType"
+      [(selected)]="adState.propertyType"
     ></app-dropdown>
   </div>
 
@@ -56,7 +56,7 @@
         [placeholder]="dropdownPlaceholder"
         [multiselection]="selectedTab.key === 'find'"
         [items]="roomsCount"
-        [(selected)]="selectedRoomsCounts"
+        [(selected)]="adState.roomsCount"
       ></app-dropdown>
     </ng-container>
   </div>
@@ -65,14 +65,15 @@
     <h4>Кто разместил</h4>
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
-      [multiselection]="selectedTab.key === 'find'"
       [items]="advertiserTypes"
-      [(selected)]="selectedAdvertiserTypes"
+      [(selected)]="adState.advertiser"
     ></app-dropdown>
   </div>
   <div class="form-item"></div>
 
   <div class="full-width">
-    <button class="btn btn-main pull-right">{{selectedTab.buttonTitle}}</button>
+    <button class="btn btn-main pull-right"
+      (click)="onClickNext()"
+    >{{selectedTab.buttonTitle}}</button>
   </div>
 </div>

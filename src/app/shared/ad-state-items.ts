@@ -59,31 +59,31 @@ export const LEASE_TERMS: AdStateItem[] = [
 
 export const ROOMS_COUNT: AdStateItem[] = [
   {
-    id: 0,
+    id: '0',
     title: 'Студия',
   },
   {
-    id: 1,
+    id: '1',
     title: '1-комнатная',
   },
   {
-    id: 2,
+    id: '2',
     title: '2-комнатная',
   },
   {
-    id: 3,
+    id: '3',
     title: '3-комнатная',
   },
   {
-    id: 4,
+    id: '4',
     title: '4-комнатная',
   },
   {
-    id: 5,
+    id: '5',
     title: '5-комнатная',
   },
   {
-    id: 6,
+    id: '6',
     title: 'многокомнатная',
   },
 ];
@@ -132,7 +132,7 @@ export const CITIES: AdStateItem[] = [
   'Ярославль',
 ].map((city: string, index: number) => {
   return {
-    id: index,
+    id: index.toString(),
     title: city,
   };
 });
