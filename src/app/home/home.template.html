@@ -5,7 +5,7 @@
            [key]="tab.key">{{ tab.name }}</app-tab>
 </app-tabset>
 
-<div class="form-container">
+<div *ngIf="!needAuth" class="form-container">
   <div class="form-item">
     <h4>Населенный пункт</h4>
     <app-dropdown
@@ -77,3 +77,4 @@
     >{{selectedTab.buttonTitle}}</button>
   </div>
 </div>
+<app-vk-auth *ngIf="needAuth"></app-vk-auth>

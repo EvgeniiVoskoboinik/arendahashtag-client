@@ -93,3 +93,16 @@ export interface FeedSearchReq {
   start_from?: number;
   fields?: string;
 }
+
+export interface VkSession {
+  expire: number;
+  mid: string;
+  secret: string;
+  sid: string;
+  sig: string;
+}
+
+export interface VkLoginStatus {
+  session: VkSession;
+  status: 'connected' | 'unknown' | 'not_authorized';
+}

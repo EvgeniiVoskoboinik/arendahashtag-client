@@ -4,6 +4,7 @@ import {AdState, AdStateItem} from '../shared/interfaces/common';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
 
 import {HomeApiService} from './home.api.service';
+import {SharedService} from '../shared/shared.service';
 
 export type TabKey = string;
 
@@ -17,6 +18,7 @@ export interface Tab {
   selector: 'app-home',
   templateUrl: './home.template.html',
   styleUrls: ['./home.component.scss'],
+  providers: [HomeApiService],
   animations: HOME_ANIMATIONS,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -62,10 +64,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
     },
   ];
   selectedTab: Tab = this.tabs[0];
+
+  get needAuth(): boolean {
+    let status = this.sharedService.vkLoginStatus;
+    return !status || status.status !== 'connected';
+  }
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private homeApiService: HomeApiService,
-    ) { }
+    private sharedService: SharedService,
+    ) {
+
+    this.sharedService.vkLoginStatus$
+      .subscribe(__ => {
+        this.changeDetectorRef.markForCheck();
+      });
+
+  }
 
   private postAd() {
     this.homeApiService.post(this.adState)

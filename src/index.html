@@ -7,24 +7,14 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://vk.com/js/api/openapi.js?147" type="text/javascript"></script>
+  <script type="text/javascript">
+    VK.init({
+      apiId: 6114231
+    });
+  </script>
 </head>
 <body>
-  <div id="vk_api_transport"></div>
-  <script type="text/javascript">
-    window.vkAsyncInit = function() {
-      VK.init({
-        apiId: 6114231
-      });
-    };
-
-    setTimeout(function() {
-      var el = document.createElement("script");
-      el.type = "text/javascript";
-      el.src = "https://vk.com/js/api/openapi.js?146";
-      el.async = true;
-      document.getElementById("vk_api_transport").appendChild(el);
-    }, 0);
-  </script>
   <app-root></app-root>
 </body>
 </html>
