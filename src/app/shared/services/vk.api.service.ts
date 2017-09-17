@@ -3,6 +3,7 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 
 import {CountriesReq, VkCountry, CitiesReq, VkCity} from '../interfaces';
+import {AdState} from '../interfaces/common';
 
 @Injectable()
 export class VkApiService{
@@ -21,6 +22,16 @@ export class VkApiService{
     return VK.Api.call('database.getCities', params, data => {
       return Observable.of(data.response);
     });
+  }
+
+  createSearchQuery(adState: AdState): string {
+    let queryArr = ['#arendahashtag'];
+
+    Object.keys(adState).forEach(key => {
+      console.log(key, adState[key]);
+    });
+
+    return queryArr.join(' ');
   }
 
 }

@@ -1,7 +1,6 @@
 :host{
   display: flex;
   flex-direction: column;
-  //justify-content: center;
   align-items: center;
   width: 100%;
   min-height: 100vh;
@@ -9,27 +8,4 @@
   background: linear-gradient(to bottom, rgb(1, 176, 221) 0%, rgb(25, 110, 189) 100%);
 
   padding-top: 100px;
-
-  app-tabset{
-    margin-bottom: 62px;
-  }
-
-  .form-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 800px;
-    padding: 0 24px;
-
-    .form-item{
-      width: 45%;
-      height: 100px;
-    }
-
-    .full-width{
-      width: 100%;
-    }
-
-  }
 }

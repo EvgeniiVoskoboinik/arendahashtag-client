@@ -1,0 +1,79 @@
+<app-tabset [@fadeIn]="''" [@slideLeft]="''"
+            [selectedKey]="selectedTab.key"
+            (select)="onTabSelected($event)">
+  <app-tab *ngFor="let tab of tabs"
+           [key]="tab.key">{{ tab.name }}</app-tab>
+</app-tabset>
+
+<div *ngIf="!needAuth" class="form-container">
+  <div class="form-item">
+    <h4>Населенный пункт</h4>
+    <app-dropdown
+      [placeholder]="dropdownPlaceholder"
+      [searching]="true"
+      [clientSearching]="true"
+      [items]="cities"
+      [(selected)]="adState.city"
+    ></app-dropdown>
+  </div>
+  <div class="form-item"></div>
+
+  <div class="form-item">
+    <h4>Тип объявления</h4>
+    <app-dropdown
+      [placeholder]="dropdownPlaceholder"
+      [items]="adTypes"
+      [(selected)]="adState.adType"
+      (selectedChange)="onSelectedChange($event)"
+
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <ng-container *ngIf="isRentSelected">
+      <h4>Срок аренды</h4>
+      <app-dropdown
+        [placeholder]="dropdownPlaceholder"
+        [items]="leaseTerms"
+        [(selected)]="adState.leaseTerm"
+      ></app-dropdown>
+    </ng-container>
+  </div>
+
+  <div class="form-item">
+    <h4>Вид недвижимости</h4>
+    <app-dropdown
+      [placeholder]="dropdownPlaceholder"
+      [items]="propertyTypes"
+      [(selected)]="adState.propertyType"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-item">
+    <ng-container *ngIf="ispropertyContainsRooms">
+      <h4>Количество комнат</h4>
+      <app-dropdown
+        [placeholder]="dropdownPlaceholder"
+        [multiselection]="selectedTab.key === 'find'"
+        [items]="roomsCount"
+        [(selected)]="adState.roomsCount"
+      ></app-dropdown>
+    </ng-container>
+  </div>
+
+  <div class="form-item">
+    <h4>Кто разместил</h4>
+    <app-dropdown
+      [placeholder]="dropdownPlaceholder"
+      [items]="advertiserTypes"
+      [(selected)]="adState.advertiser"
+    ></app-dropdown>
+  </div>
+  <div class="form-item"></div>
+
+  <div class="full-width">
+    <button class="btn btn-main pull-right"
+            (click)="onClickNext()"
+    >{{selectedTab.buttonTitle}}</button>
+  </div>
+</div>

@@ -13,6 +13,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {HeaderComponent} from './header/header.component';
 import {VkAuthComponent} from './vk-auth/vk-auth.component';
+import {AdFormComponent} from './ad-form/ad-form.component';
+
+
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
 
 @NgModule({
@@ -22,6 +25,7 @@ import {DropdownComponent} from './shared/dropdown/dropdown.component';
     HomeComponent,
     HeaderComponent,
     VkAuthComponent,
+    AdFormComponent,
 
     DropdownComponent,
   ],
