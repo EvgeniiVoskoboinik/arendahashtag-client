@@ -1,5 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
+import {VkAuthRes} from '../shared/interfaces/vk.api.interfaces';
 
 
 @Component({
@@ -16,8 +17,9 @@ export class VkAuthComponent implements OnInit{
 
   ngOnInit() {
     VK.Widgets.Auth('vk_auth', {
-      onAuth: data => {
-        console.log(data);
+      onAuth: (res: VkAuthRes) => {
+        console.log(res);
+        this.sharedService.vkUserData = res;
         },
     });
   }

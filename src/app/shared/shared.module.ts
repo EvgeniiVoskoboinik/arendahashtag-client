@@ -8,10 +8,8 @@ import {VkApiService} from './services/vk.api.service';
             imports: [
               CommonModule,
             ],
-            declarations: [
-            ],
-            exports: [
-            ],
+            declarations: [],
+            exports: [],
             entryComponents: [],
           })
 export class SharedModule {

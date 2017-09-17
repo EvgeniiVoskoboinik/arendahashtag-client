@@ -103,6 +103,24 @@ export interface VkSession {
 }
 
 export interface VkLoginStatus {
+  session?: VkSession;
+  status?: 'connected' | 'unknown' | 'not_authorized';
+}
+
+export interface VkAuthRes {
+  first_name: string;
+  hash: string;
+  last_name: string;
+  photo: string;
+  photo_rec: string;
   session: VkSession;
-  status: 'connected' | 'unknown' | 'not_authorized';
+  uid: number;
+}
+export interface VkUserData extends VkLoginStatus{
+  first_name?: string;
+  hash?: string;
+  last_name?: string;
+  photo?: string;
+  photo_rec?: string;
+  uid?: number;
 }

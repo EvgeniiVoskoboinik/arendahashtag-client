@@ -66,8 +66,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selectedTab: Tab = this.tabs[0];
 
   get needAuth(): boolean {
-    let status = this.sharedService.vkLoginStatus;
-    return !status || status.status !== 'connected';
+    let status = this.sharedService.vkUserData;
+    return !status || !status.session;
   }
 
   constructor(
@@ -76,9 +76,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private sharedService: SharedService,
     ) {
 
-    this.sharedService.vkLoginStatus$
+    this.sharedService.vkUserData$
+      .skip(1)
       .subscribe(__ => {
-        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
       });
 
   }
