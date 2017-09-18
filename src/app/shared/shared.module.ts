@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 
 import {SharedService} from './shared.service';
 import {VkApiService} from './services/vk.api.service';
+import {Utils} from './utils';
+
 
 @NgModule({
             imports: [
@@ -19,6 +21,7 @@ export class SharedModule {
       providers: [
         VkApiService,
         SharedService,
+        Utils,
       ],
     };
   }

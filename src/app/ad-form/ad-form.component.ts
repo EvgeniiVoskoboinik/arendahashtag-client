@@ -2,9 +2,9 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
-import {AdState, AdStateItem} from '../shared/interfaces/common';
-import {FeedSearchReq, FeedSearchRes} from '../shared/interfaces/vk.api.interfaces';
+import {AdState} from '../shared/interfaces/common';
 import {VkApiService} from '../shared/services/vk.api.service';
+import {Router} from '@angular/router';
 
 
 export type TabKey = string;
@@ -69,6 +69,7 @@ export class AdFormComponent implements OnInit{
   constructor(
     private sharedService: SharedService,
     private vkApiService: VkApiService,
+    private router: Router,
   ) {
   }
 
@@ -79,13 +80,8 @@ export class AdFormComponent implements OnInit{
   }
 
   private findAd() {
-    let params: FeedSearchReq = {
-      q: this.vkApiService.createSearchQuery(this.adState),
-      extended: 1,
-    };
-
-    VK.Api.call('newsfeed.search', params, data => {
-      console.log(data);
+    this.router.navigate(['/find'], {
+      queryParams: this.adState,
     });
   }
 

@@ -14,7 +14,8 @@ import { HomeComponent } from './home/home.component';
 import {HeaderComponent} from './header/header.component';
 import {VkAuthComponent} from './vk-auth/vk-auth.component';
 import {AdFormComponent} from './ad-form/ad-form.component';
-
+import {PostComponent} from './post/post.component';
+import {PostListComponent} from './post-list/post-list.component';
 
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
 
@@ -26,6 +27,8 @@ import {DropdownComponent} from './shared/dropdown/dropdown.component';
     HeaderComponent,
     VkAuthComponent,
     AdFormComponent,
+    PostComponent,
+    PostListComponent,
 
     DropdownComponent,
   ],
