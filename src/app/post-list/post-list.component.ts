@@ -1,11 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges, OnDestroy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {FeedItem, FeedSearchReq} from '../shared/interfaces/vk.api.interfaces';
-import {AdState} from '../shared/interfaces/common';
 import {VkApiService} from '../shared/services/vk.api.service';
-import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
-import {Utils} from '../shared/utils';
+import {AdStateStore, AdState} from '../shared/redux';
 
 
 @Component({
@@ -14,22 +12,23 @@ import {Utils} from '../shared/utils';
              styleUrls: ['./post-list.style.scss'],
              changeDetection: ChangeDetectionStrategy.OnPush,
            })
-export class PostListComponent implements OnInit, OnChanges, OnDestroy{
-  @Input() adState: AdState;
+export class PostListComponent implements OnDestroy{
+  private adState: AdState;
+  private destroyed$ = new Subject<void>();
 
   posts: FeedItem[];
 
   constructor(
     private sharedService: SharedService,
     private vkApiService: VkApiService,
-    private route: ActivatedRoute,
-  private utils: Utils,
+    private adStateStore: AdStateStore,
   ) {
-
-    this.route.queryParams
+    this.adStateStore.state$
       .takeUntil(this.destroyed$)
-      .subscribe(params => {
-        this.adState = <AdState>this.utils.copyAndDecodeQueryParams(params);
+      .subscribe(state => {
+        console.log(state);
+        this.adState = state;
+        this.loadPosts();
       });
 
   }
@@ -44,20 +43,6 @@ export class PostListComponent implements OnInit, OnChanges, OnDestroy{
       console.log(data);
     });
   }
-
-  ngOnInit() {
-
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    let {adState} = changes;
-
-    if (adState) {
-      this.loadPosts();
-    }
-  }
-
-  protected destroyed$ = new Subject<void>();
 
   ngOnDestroy() {
     this.destroyed$.next();

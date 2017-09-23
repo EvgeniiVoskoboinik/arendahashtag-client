@@ -1,9 +1,11 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {SharedService} from './shared.service';
 import {VkApiService} from './services/vk.api.service';
 import {Utils} from './utils';
+import {AdReducer} from './redux/reducer';
+import {AdStateStore} from './redux/store';
 
 
 @NgModule({
@@ -12,17 +14,12 @@ import {Utils} from './utils';
             ],
             declarations: [],
             exports: [],
-            entryComponents: [],
+            providers: [
+              VkApiService,
+              SharedService,
+              Utils,
+              AdReducer,
+              AdStateStore,
+            ],
           })
-export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: this,
-      providers: [
-        VkApiService,
-        SharedService,
-        Utils,
-      ],
-    };
-  }
-}
+export class SharedModule {}

@@ -1,11 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
-import {AdState} from '../shared/interfaces/common';
-import {VkApiService} from '../shared/services/vk.api.service';
 import {Router} from '@angular/router';
-
+import {AdStateStore, EditValueAction, Actions, AdState} from '../shared/redux';
 
 export type TabKey = string;
 
@@ -21,7 +19,7 @@ export interface Tab {
   styleUrls: ['./ad-form.style.scss'],
   animations: AD_FORM_ANIMATIONS,
   changeDetection: ChangeDetectionStrategy.OnPush,
-           })
+})
 export class AdFormComponent implements OnInit{
 
   cities = CITIES;
@@ -31,15 +29,7 @@ export class AdFormComponent implements OnInit{
   leaseTerms = LEASE_TERMS;
   roomsCount = ROOMS_COUNT;
 
-  adState: AdState = {
-    city: null,
-    adType: null,
-    leaseTerm: null,
-    propertyType: null,
-    roomsCount: null,
-    advertiser: null,
-  };
-
+  adState: AdState;
   dropdownPlaceholder = 'Не выбрано';
 
 
@@ -68,12 +58,16 @@ export class AdFormComponent implements OnInit{
 
   constructor(
     private sharedService: SharedService,
-    private vkApiService: VkApiService,
     private router: Router,
+    private adStateStore: AdStateStore,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
+    this.adStateStore.state$
+      .subscribe(state => {
+        console.log(state);
+        this.adState = state;
+      });
   }
-
-
 
   private postAd() {
 
@@ -90,7 +84,8 @@ export class AdFormComponent implements OnInit{
     this.selectedTab = this.tabs.find(tab => tab.key === key);
   }
 
-  onSelectedChange(item: any) {
+  onSelectedChange(key: string, value: any) {
+    this.changeStateValue(key, value);
   }
 
   onClickNext() {
@@ -99,6 +94,15 @@ export class AdFormComponent implements OnInit{
     } else {
       this.findAd();
     }
+  }
+
+  private changeStateValue(key: string, value: any) {
+    let action: EditValueAction = {
+      type: Actions.SetValue,
+      key,
+      value,
+    };
+    this.adStateStore.dispatch(action);
   }
 
   ngOnInit() {

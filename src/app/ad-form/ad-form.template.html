@@ -13,7 +13,8 @@
       [searching]="true"
       [clientSearching]="true"
       [items]="cities"
-      [(selected)]="adState.city"
+      [selected]="adState.city"
+      (selectedChange)="onSelectedChange('city', $event)"
     ></app-dropdown>
   </div>
   <div class="form-item"></div>
@@ -23,9 +24,8 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="adTypes"
-      [(selected)]="adState.adType"
-      (selectedChange)="onSelectedChange($event)"
-
+      [selected]="adState.adType"
+      (selectedChange)="onSelectedChange('adType', $event)"
     ></app-dropdown>
   </div>
 
@@ -35,7 +35,8 @@
       <app-dropdown
         [placeholder]="dropdownPlaceholder"
         [items]="leaseTerms"
-        [(selected)]="adState.leaseTerm"
+        [selected]="adState.leaseTerm"
+        (selectedChange)="onSelectedChange('leaseTerm', $event)"
       ></app-dropdown>
     </ng-container>
   </div>
@@ -45,7 +46,8 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="propertyTypes"
-      [(selected)]="adState.propertyType"
+      [selected]="adState.propertyType"
+      (selectedChange)="onSelectedChange('propertyType', $event)"
     ></app-dropdown>
   </div>
 
@@ -56,7 +58,8 @@
         [placeholder]="dropdownPlaceholder"
         [multiselection]="selectedTab.key === 'find'"
         [items]="roomsCount"
-        [(selected)]="adState.roomsCount"
+        [selected]="adState.roomsCount"
+        (selectedChange)="onSelectedChange('roomsCount', $event)"
       ></app-dropdown>
     </ng-container>
   </div>
@@ -66,7 +69,8 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="advertiserTypes"
-      [(selected)]="adState.advertiser"
+      [selected]="adState.advertiser"
+      (selectedChange)="onSelectedChange('advertiser', $event)"
     ></app-dropdown>
   </div>
   <div class="form-item"></div>

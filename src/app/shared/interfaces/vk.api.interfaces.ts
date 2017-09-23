@@ -48,18 +48,20 @@ export interface Photo{
   access_key: string;
 }
 export interface Attachment{
-  type: 'string';
-  photo: Photo;
+  type: 'photo'|'video';
+  photo?: Photo;
+  video?: any;
 }
 export interface FeedItem{
   id: number;
   date: number;
-  owner_id: number;
-  from_id: number;
+  owner_id: number; //if negative - group
+  from_id: number; //if negative - group
   post_type: string;
   text: string;
+  attachment: Attachment;
   attachments: Attachment[];
-  post_source: {
+  post_source?: {
     type: 'string';
   };
   comments: {
@@ -77,8 +79,33 @@ export interface FeedItem{
     count: number;
     user_reposted: number;
   };
-
+  user?: PostUser;
+  group?: PostGroup;
 }
+
+export interface PostUser{
+  first_name: string;
+  last_name: string;
+  online: number;
+  online_app: string;
+  online_mobile: number;
+  photo: string;
+  photo_medium_rec: string;
+  screen_name: string;
+  sex: number;
+  uid: number;
+}
+export interface PostGroup{
+  gid: number;
+  is_closed: 0|1;
+  name: string;
+  photo: string;
+  photo_big: string;
+  photo_medium: string;
+  screen_name: string;
+  type: string;
+}
+
 export interface FeedSearchRes {
   response: {
     items: FeedItem[];

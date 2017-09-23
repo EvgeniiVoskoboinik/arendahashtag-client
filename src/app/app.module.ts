@@ -42,7 +42,7 @@ import {DropdownComponent} from './shared/dropdown/dropdown.component';
 
     UiKitModule,
     routing,
-    SharedModule.forRoot(),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

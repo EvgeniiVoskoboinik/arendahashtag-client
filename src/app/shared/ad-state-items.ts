@@ -1,4 +1,4 @@
-import {AdStateItem} from './interfaces/common';
+import {AdState} from './redux/interfaces';
 
 export const AD_TYPES: AdStateItem[] = [
   {

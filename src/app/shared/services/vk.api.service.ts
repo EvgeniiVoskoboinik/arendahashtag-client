@@ -3,7 +3,7 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 
 import {CountriesReq, VkCountry, CitiesReq, VkCity} from '../interfaces';
-import {AdState} from '../interfaces/common';
+import {AdState} from '../redux/interfaces';
 
 @Injectable()
 export class VkApiService{
