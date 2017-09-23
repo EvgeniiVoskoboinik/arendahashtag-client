@@ -1,5 +1,25 @@
 <div class="post" *ngIf="post">
-  <div class="post-header">{{post.owner_id}}</div>
-  <div class="post-text">{{post.text}}</div>
+  <div class="post-header">
+    <a target="_blank" href="https://vk.com/santa.sofia" class="post-image">
+      <img src="https://sun9-12.userapi.com/c840634/v840634401/7db1/rAF1LfVihm4.jpg" width="50" height="50">
+    </a>
+    <div class="post-header-info">
+      <div class="post-author">
+        <a target="_blank" href="https://vk.com/santa.sofia">Santa Sofia</a>
+      </div>
+      <div class="post-date">{{1505997813 * 1000 | date: 'dd.MM.yyyy hh:mm'}}</div>
+    </div>
+    <a target="_blank" href="" class="post-link"
+       title="Открыть в ВК"
+    >
+      <i class="fa fa-vk" aria-hidden="true"></i>
+    </a>
+    <!--https://vk.com/wall{{fromId_id}}-->
+  </div>
+  <div class="post-content">
+    <div class="post-text"
+      [innerHTML]="'📍ПОЛНОЕ ПЕРЕКРЫТИЕ ДВИЖЕНИЯ ТРАНСПОРТА ЧЕРЕЗ ПЛОТИНУ📍 <br> <br>23 сентября 2017 года для укладки асфальтового покрытия <b>с 11.00 до 16.00</b> планируется полное перекрытие движения автотранспорта через плотину реки Волга в Дубне.'"
+    ></div>
+  </div>
   <div class="post-attachments"></div>
 </div>
