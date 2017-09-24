@@ -6,14 +6,18 @@ import {VkApiService} from './services/vk.api.service';
 import {Utils} from './utils';
 import {AdReducer} from './redux/reducer';
 import {AdStateStore} from './redux/store';
-
+import {AutosizeDirective} from './directives/autosize';
 
 @NgModule({
             imports: [
               CommonModule,
             ],
-            declarations: [],
-            exports: [],
+            declarations: [
+              AutosizeDirective,
+            ],
+            exports: [
+              AutosizeDirective,
+            ],
             providers: [
               VkApiService,
               SharedService,

@@ -20,9 +20,27 @@
       height: 100px;
     }
 
+    .ad-description{
+      width: 100%;
+      border-radius: 2px;
+      border-color: white;
+      background: none;
+      margin: 0 auto;
+      resize: none;
+      font-size: inherit;
+      outline: none;
+      padding: 5px 10px;
+    }
+
     .full-width{
       width: 100%;
     }
 
+    .next-button-container{
+      margin-top: 30px;
+    }
   }
 }
+::-webkit-input-placeholder {color: white;}
+::-moz-placeholder          {color: white;}
+:-ms-input-placeholder      {color: white;}

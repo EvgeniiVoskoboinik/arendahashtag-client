@@ -1,4 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {
+  Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef,
+} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';

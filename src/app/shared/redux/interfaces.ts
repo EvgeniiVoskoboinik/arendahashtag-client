@@ -9,6 +9,7 @@ export interface AdState{
   leaseTerm: string[];
   roomsCount: string[];
   advertiser: string[];
+  description: string;
 }
 export interface AdAction{
   type: string | number;

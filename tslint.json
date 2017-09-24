@@ -138,9 +138,9 @@
 
 
 
-    "component-selector": [true, "element", ["h", "app"], "kebab-case"],
+//    "component-selector": [true, "element", ["h", "app"], "kebab-case"],
     "component-class-suffix": [true, "Component"],
-    "directive-selector": [true, "attribute", ["beh"], "camelCase"],
+//    "directive-selector": [true, "attribute", ["app"], "camelCase"],
     "directive-class-suffix": [true, "Directive"],
 
     "no-access-missing-member": true,

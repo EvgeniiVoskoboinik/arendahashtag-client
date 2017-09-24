@@ -75,7 +75,14 @@
   </div>
   <div class="form-item"></div>
 
-  <div class="full-width">
+  <textarea autosize class="ad-description"
+    *ngIf="selectedTab.key === 'create'"
+    [ngModel]="adState.description"
+    (ngModelChange)="onSelectedChange('description', $event)"
+    placeholder="Текст объявления"
+  ></textarea>
+
+  <div class="full-width next-button-container">
     <button class="btn btn-main pull-right"
             (click)="onClickNext()"
     >{{selectedTab.buttonTitle}}</button>

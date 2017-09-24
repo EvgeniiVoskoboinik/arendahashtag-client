@@ -10,6 +10,7 @@ const initialState: AdState = {
   propertyType: null,
   roomsCount: null,
   advertiser: null,
+  description: '',
 };
 
 @Injectable()
