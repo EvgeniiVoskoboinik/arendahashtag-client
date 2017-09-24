@@ -12,4 +12,12 @@
       }
     }
   }
+
+  .back-button{
+    position: fixed;
+    color: white;
+    font-size: 32px;
+    left: 24px;
+    top: calc(50% - 16px);
+  }
 }
