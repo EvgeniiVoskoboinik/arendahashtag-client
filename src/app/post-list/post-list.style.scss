@@ -1,5 +1,15 @@
 :host{
-  max-width: 800px;
+  width: 800px;
   display: flex;
   margin: 0 auto;
+
+  .post-container{
+    width: 100%;
+
+    .post-item{
+      &:not(:first-child){
+        margin-top: 20px;
+      }
+    }
+  }
 }

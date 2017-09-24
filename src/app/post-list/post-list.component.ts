@@ -1,10 +1,10 @@
-import {Component, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
-import {FeedItem, FeedSearchReq} from '../shared/interfaces/vk.api.interfaces';
+import {FeedSearchReq, FeedSearchRes} from '../shared/interfaces/vk.api.interfaces';
 import {VkApiService} from '../shared/services/vk.api.service';
 import {Subject} from 'rxjs';
 import {AdStateStore, AdState} from '../shared/redux';
-
+import {FeedItem} from '../shared/interfaces/feedItem';
 
 @Component({
              selector: 'app-post-list',
@@ -22,6 +22,7 @@ export class PostListComponent implements OnDestroy{
     private sharedService: SharedService,
     private vkApiService: VkApiService,
     private adStateStore: AdStateStore,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.adStateStore.state$
       .takeUntil(this.destroyed$)
@@ -37,10 +38,15 @@ export class PostListComponent implements OnDestroy{
     let params: FeedSearchReq = {
       q: this.vkApiService.createSearchQuery(this.adState),
       extended: 1,
+      v: 6.68,
+      count: 200,
     };
 
-    VK.Api.call('newsfeed.search', params, data => {
-      console.log(data);
+    VK.Api.call('newsfeed.search', params, (data: FeedSearchRes) => {
+      let res = data.response;
+      this.posts = res.items.map(x => FeedItem.createFromDto(x, res.groups, res.profiles));
+      this.changeDetectorRef.markForCheck();
+      this.changeDetectorRef.detectChanges();
     });
   }
 

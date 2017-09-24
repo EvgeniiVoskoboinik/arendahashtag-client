@@ -52,15 +52,14 @@ export interface Attachment{
   photo?: Photo;
   video?: any;
 }
-export interface FeedItem{
+export interface FeedItemDTO{
   id: number;
   date: number;
   owner_id: number; //if negative - group
   from_id: number; //if negative - group
   post_type: string;
   text: string;
-  attachment: Attachment;
-  attachments: Attachment[];
+  attachments?: Attachment[];
   post_source?: {
     type: 'string';
   };
@@ -79,36 +78,34 @@ export interface FeedItem{
     count: number;
     user_reposted: number;
   };
-  user?: PostUser;
-  group?: PostGroup;
 }
 
 export interface PostUser{
+  id: number;
   first_name: string;
   last_name: string;
   online: number;
-  online_app: string;
-  online_mobile: number;
-  photo: string;
-  photo_medium_rec: string;
+  photo_50: string;
   screen_name: string;
   sex: number;
-  uid: number;
 }
 export interface PostGroup{
-  gid: number;
+  id: number;
   is_closed: 0|1;
   name: string;
-  photo: string;
-  photo_big: string;
-  photo_medium: string;
+  photo_50: string;
   screen_name: string;
   type: string;
 }
 
 export interface FeedSearchRes {
   response: {
-    items: FeedItem[];
+    count: number;
+    groups: PostGroup[];
+    profiles: PostUser[];
+    next_from: string;
+    total_count: number;
+    items: FeedItemDTO[];
   };
 }
 export interface FeedSearchReq {
@@ -119,6 +116,7 @@ export interface FeedSearchReq {
   end_time?: number; //not by default
   start_from?: number;
   fields?: string;
+  v?: number;
 }
 
 export interface VkSession {

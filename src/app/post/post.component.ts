@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
-import {FeedItem} from '../shared/interfaces/vk.api.interfaces';
+import {FeedItem} from '../shared/interfaces/feedItem';
 
 
 @Component({
