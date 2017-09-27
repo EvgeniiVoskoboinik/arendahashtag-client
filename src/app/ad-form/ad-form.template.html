@@ -56,7 +56,6 @@
       <h4>Количество комнат</h4>
       <app-dropdown
         [placeholder]="dropdownPlaceholder"
-        [multiselection]="selectedTab.key === 'find'"
         [items]="roomsCount"
         [selected]="adState.roomsCount"
         (selectedChange)="onSelectedChange('roomsCount', $event)"

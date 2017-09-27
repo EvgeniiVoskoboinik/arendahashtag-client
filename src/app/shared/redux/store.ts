@@ -8,8 +8,8 @@ const initialState: AdState = {
   adType: null,
   leaseTerm: null,
   propertyType: null,
-  roomsCount: null,
-  advertiser: null,
+  roomsCount: ['no_matter'],
+  advertiser: ['no_matter'],
   description: '',
 };
 

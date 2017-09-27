@@ -1,5 +1,6 @@
 export interface AdStateItem{
   id: string;
+  tag: string;
   title: string;
 }
 export interface AdState{
