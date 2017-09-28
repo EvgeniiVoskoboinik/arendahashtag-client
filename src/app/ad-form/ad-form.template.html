@@ -11,10 +11,13 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [searching]="true"
-      [clientSearching]="true"
+      [clientSearching]="false"
       [items]="cities"
       [selected]="adState.city"
+      [searchDebounce]="300"
+
       (selectedChange)="onSelectedChange('city', $event)"
+      (searchChange)="onCitySearchChange($event)"
     ></app-dropdown>
   </div>
   <div class="form-item"></div>

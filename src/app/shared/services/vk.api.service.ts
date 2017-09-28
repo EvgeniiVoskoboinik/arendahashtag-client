@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {CountriesReq, VkCountry, CitiesReq, VkCity} from '../interfaces';
 import {AdState} from '../redux/interfaces';
 
+export const VK_API_VERSION = 6.68;
+
 @Injectable()
 export class VkApiService{
 

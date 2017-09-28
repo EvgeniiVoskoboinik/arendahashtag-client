@@ -2,6 +2,7 @@ export interface DbReq{
   need_all?: 1|0;
   offset?: number;
   count?: number;
+  v: number;
 }
 export interface DbRes <T>{
   response: {

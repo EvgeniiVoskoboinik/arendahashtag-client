@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {FeedSearchReq, FeedSearchRes} from '../shared/interfaces/vk.api.interfaces';
-import {VkApiService} from '../shared/services/vk.api.service';
+import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
 import {Subject} from 'rxjs';
 import {AdStateStore, AdState} from '../shared/redux';
 import {FeedItem} from '../shared/interfaces/feedItem';
@@ -38,7 +38,7 @@ export class PostListComponent implements OnDestroy{
     let params: FeedSearchReq = {
       q: this.vkApiService.createSearchQuery(this.adState),
       extended: 1,
-      v: 6.68,
+      v: VK_API_VERSION,
       count: 200,
     };
 

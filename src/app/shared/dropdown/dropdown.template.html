@@ -41,7 +41,7 @@
           (click)="onItemClick(item.id, $event)"
       >
         <div class="dropdown-item-content">
-          {{ item.title }}
+          {{ item.title }} <span class="item-description" *ngIf="item.description">({{item.description}})</span>
         </div>
       </li>
     </ul>

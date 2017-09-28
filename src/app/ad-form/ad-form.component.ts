@@ -6,6 +6,8 @@ import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
 import {Router} from '@angular/router';
 import {AdStateStore, EditValueAction, Actions, AdState} from '../shared/redux';
+import {CitiesReq, VkCity} from '../shared/interfaces/vk.api.interfaces';
+import {VK_API_VERSION} from '../shared/services/vk.api.service';
 
 export type TabKey = string;
 
@@ -24,7 +26,7 @@ export interface Tab {
 })
 export class AdFormComponent implements OnInit{
 
-  cities = CITIES;
+  cities;
   adTypes = AD_TYPES;
   propertyTypes = PROPERTY_TYPES;
   advertiserTypes = ADVERTISER_TYPES;
@@ -107,7 +109,33 @@ export class AdFormComponent implements OnInit{
     this.adStateStore.dispatch(action);
   }
 
-  ngOnInit() {
+  onCitySearchChange(str?: string) {
+    let params: CitiesReq = {
+      country_id: 1,
+      v: VK_API_VERSION,
+      count: 50,
+    };
+    if (str) {
+      params.q = str;
+    }
 
+    VK.Api.call('database.getCities', params, data => {
+      this.cities = data.response.items.map(x => {
+        let description = '';
+        if (x.area) description = `${x.area}, `;
+        if (x.region) description += x.region;
+
+        return {
+          id: x.id,
+          title: x.title,
+          description: description.trim(),
+        };
+      });
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  ngOnInit() {
+    this.onCitySearchChange();
   }
 }
