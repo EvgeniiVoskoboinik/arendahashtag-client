@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 
-import {CountriesReq, VkCountry, CitiesReq, VkCity} from '../interfaces';
-import {AdState} from '../redux/interfaces';
+import {CountriesReq, VkCountry} from '../interfaces';
+import {AdState, AdStateItem} from '../redux/interfaces';
 
 export const VK_API_VERSION = 6.68;
 
@@ -23,9 +23,7 @@ export class VkApiService{
   createSearchQuery(adState: AdState): string {
     let queryArr = ['#arendahashtag'];
 
-    Object.keys(adState).forEach(key => {
-      console.log(key, adState[key]);
-    });
+    Object.keys(adState).forEach(key => {});
 
     return queryArr.join(' ');
   }
@@ -43,4 +41,9 @@ export class VkApiService{
 #arendahashtag ${tags}`;
   }
 
+  static createCityHashtag(city: AdStateItem): string {
+    const ID_PREFIX = 'cid';
+    let title = city.title.replace(/[-()\s]/gi, '');
+    return `#${ID_PREFIX + city.id} #${title}`;
+  }
 }

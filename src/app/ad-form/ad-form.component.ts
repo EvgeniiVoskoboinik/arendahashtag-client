@@ -142,7 +142,7 @@ export class AdFormComponent implements OnInit{
         return {
           id: x.id,
           title: x.title,
-          tag: `#${x.id} #${x.title}`,
+          tag: VkApiService.createCityHashtag(x),
           description: description.trim(),
         };
       });
