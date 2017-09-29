@@ -87,6 +87,7 @@ export class AdFormComponent implements OnInit{
       if (error) return;
 
       this.zone.run(() => {
+        this.adStateStore.dispatch({type: Actions.ResetState});
         this.router.navigate(['/post_result'], {
           queryParams: response,
         });

@@ -1,22 +1,11 @@
 import {Injectable} from '@angular/core';
-import {AdReducer} from './reducer';
+import {AdReducer, INITIAL_STATE} from './reducer';
 import {AdState, AdAction} from './interfaces';
 import {BehaviorSubject} from 'rxjs';
-import {ADVERTISER_TYPES, ROOMS_COUNT} from '../ad-state-items';
-
-const initialState: AdState = {
-  city: null,
-  adType: null,
-  leaseTerm: null,
-  propertyType: null,
-  roomsCount: [ROOMS_COUNT[0]],
-  advertiser: [ADVERTISER_TYPES[0]],
-  description: '',
-};
 
 @Injectable()
 export class AdStateStore{
-  private readonly adStateSubject = new BehaviorSubject<AdState>(initialState);
+  private readonly adStateSubject = new BehaviorSubject<AdState>(INITIAL_STATE);
 
   state$ = this.adStateSubject.asObservable();
   get state(): AdState {
