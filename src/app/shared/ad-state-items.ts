@@ -51,7 +51,7 @@ export const PROPERTY_TYPES: AdStateItem[] = [
   },
   {
     id: 'commercial',
-    tag: '#коммерческая_недвижимость',
+    tag: '#коммерческаянедвижимость',
     title: 'Комерческая недвижимость',
   },
 ];
@@ -64,14 +64,14 @@ export const LEASE_TERMS: AdStateItem[] = [
   },
   {
     id: 'longTerm',
-    tag: '#на_длительный_срок',
+    tag: '#надлительныйсрок',
     title: 'На длительный срок',
   },
 ];
 
 export const ROOMS_COUNT: AdStateItem[] = [
   {
-    id: 'no_matter',
+    id: 'nomatter',
     tag: null,
     title: 'Без разницы',
   },
@@ -82,39 +82,39 @@ export const ROOMS_COUNT: AdStateItem[] = [
   },
   {
     id: '1room',
-    tag: '#1_комната',
+    tag: '#1комната',
     title: '1 комната',
   },
   {
     id: '2rooms',
-    tag: '#2_комнаты',
+    tag: '#2комнаты',
     title: '2 комнаты',
   },
   {
     id: '3rooms',
-    tag: '#3_комнаты',
+    tag: '#3комнаты',
     title: '3 комнаты',
   },
   {
     id: '4room',
-    tag: '#4_комнаты',
+    tag: '#4комнаты',
     title: '4 комнаты',
   },
   {
     id: '5room',
-    tag: '#5_комнат',
+    tag: '#5комнат',
     title: '5 комнат',
   },
   {
-    id: 'many_rooms',
-    tag: '#много_комнат',
+    id: 'manyrooms',
+    tag: '#многокомнат',
     title: 'много комнат',
   },
 ];
 
 export const ADVERTISER_TYPES: AdStateItem[] = [
   {
-    id: 'no_matter',
+    id: 'nomatter',
     tag: null,
     title: 'Без разницы',
   },
@@ -129,42 +129,3 @@ export const ADVERTISER_TYPES: AdStateItem[] = [
     title: 'Агентство',
   },
 ];
-
-export const CITIES: AdStateItem[] = [
-  'Москва',
-  'Санкт-Петербург',
-  'Астрахань',
-  'Барнаул',
-  'Волгоград',
-  'Воронеж',
-  'Екатеринбург',
-  'Ижевск',
-  'Иркутск',
-  'Казань',
-  'Калининград',
-  'Краснодар',
-  'Красноярск',
-  'Набережные Челны',
-  'Нижний Новгород',
-  'Новосибирск',
-  'Омск',
-  'Оренбург',
-  'Пермь',
-  'Ростов-на-Дону',
-  'Самара',
-  'Саратов',
-  'Ставрополь',
-  'Тольятти',
-  'Тула',
-  'Тюмень',
-  'Ульяновск',
-  'Уфа',
-  'Челябинск',
-  'Ярославль',
-].map((city: string, index: number) => {
-  return {
-    id: index.toString(),
-    tag: index.toString(),
-    title: city,
-  };
-});

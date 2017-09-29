@@ -21,7 +21,7 @@ export class FeedItem {
     this.ownerId = dto.owner_id;
     this.text = dto.text;
     this.attachments = dto.attachments ? dto.attachments.filter(x => x.type === 'photo') : null;
-    this.link = `${VK_LINK}wall${this.ownerId}_${this.id}`;
+    this.link = FeedItem.getWallPostLink(this.ownerId, this.id);
 
     if (this.ownerId < 0) {
       let group = groups.find(x => x.id === Math.abs(this.ownerId));
@@ -66,5 +66,9 @@ export class FeedItem {
     let obj = new FeedItem();
     obj.fillFromDto(dto, groups, profiles);
     return obj;
+  }
+
+  static getWallPostLink(ownerId: string|number, postId: string|number): string {
+    return `${VK_LINK}wall${ownerId}_${postId}`;
   }
 }

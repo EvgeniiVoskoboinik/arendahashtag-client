@@ -1,13 +1,13 @@
 import {
-  Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef,
+  Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone,
 } from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {AD_FORM_ANIMATIONS} from './ad-form.animation';
-import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT, CITIES} from '../shared/ad-state-items';
+import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT} from '../shared/ad-state-items';
 import {Router} from '@angular/router';
 import {AdStateStore, EditValueAction, Actions, AdState} from '../shared/redux';
-import {CitiesReq, VkCity} from '../shared/interfaces/vk.api.interfaces';
-import {VK_API_VERSION} from '../shared/services/vk.api.service';
+import {CitiesReq, CreateWallPostReq} from '../shared/interfaces/vk.api.interfaces';
+import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
 
 export type TabKey = string;
 
@@ -65,22 +65,36 @@ export class AdFormComponent implements OnInit{
     private router: Router,
     private adStateStore: AdStateStore,
     private changeDetectorRef: ChangeDetectorRef,
+    private vkApiService: VkApiService,
+    private zone: NgZone,
+
   ) {
     this.adStateStore.state$
       .subscribe(state => {
-        console.log(state);
         this.adState = state;
       });
   }
 
   private postAd() {
+    let params: CreateWallPostReq = {
+      message: this.vkApiService.createWallPostMessage(this.adState),
+      v: VK_API_VERSION,
+    };
+
+    VK.Api.call('wall.post', params, data => {
+      let res: {post_id: number} = data.response;
+
+      this.zone.run(() => {
+        this.router.navigate(['/post_result'], {
+          queryParams: res,
+        });
+      });
+    });
 
   }
 
   private findAd() {
-    this.router.navigate(['/find'], {
-      queryParams: this.adState,
-    });
+    this.router.navigate(['/find']);
   }
 
 

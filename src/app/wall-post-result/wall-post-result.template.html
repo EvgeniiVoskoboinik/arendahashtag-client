@@ -1,0 +1,5 @@
+<div class="container" *ngIf="postLink">
+  <h3>Запись успешно размещена</h3>
+  <a target="_blank" href="{{postLink}}">Открыть в новом окне</a>
+  <a [routerLink]="['/home']">Вернуться на главную</a>
+</div>

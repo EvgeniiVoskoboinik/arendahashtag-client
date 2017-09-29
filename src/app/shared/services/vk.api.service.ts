@@ -20,12 +20,6 @@ export class VkApiService{
     });
   }
 
-  getCities(params: CitiesReq): Observable<VkCity[]> {
-    return VK.Api.call('database.getCities', params, data => {
-      return Observable.of(data.response);
-    });
-  }
-
   createSearchQuery(adState: AdState): string {
     let queryArr = ['#arendahashtag'];
 
@@ -34,6 +28,19 @@ export class VkApiService{
     });
 
     return queryArr.join(' ');
+  }
+  createWallPostMessage(adState: AdState): string {
+    let tags: string = Object.keys(adState)
+      .map(key => adState[key])
+      .filter(Array.isArray)
+      .map(x => x[0])
+      .filter(x => x.tag != null)
+      .map(x => x.tag)
+      .join(' ');
+
+    return `${adState.description}
+
+#arendahashtag ${tags}`;
   }
 
 }

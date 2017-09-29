@@ -55,6 +55,11 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
-  }
+    "component": {},
+    "poll": 2000,
+    "serve": {
+      "port": 8080
+    }
+  },
+  "packageManager": "yarn"
 }

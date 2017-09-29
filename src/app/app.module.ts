@@ -16,7 +16,7 @@ import {VkAuthComponent} from './vk-auth/vk-auth.component';
 import {AdFormComponent} from './ad-form/ad-form.component';
 import {PostComponent} from './post/post.component';
 import {PostListComponent} from './post-list/post-list.component';
-
+import {WallPostResultComponent} from './wall-post-result/wall-post-result.component';
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
 
 @NgModule({
@@ -29,6 +29,7 @@ import {DropdownComponent} from './shared/dropdown/dropdown.component';
     AdFormComponent,
     PostComponent,
     PostListComponent,
+    WallPostResultComponent,
 
     DropdownComponent,
   ],

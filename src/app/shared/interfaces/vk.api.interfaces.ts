@@ -126,9 +126,10 @@ export interface VkSession {
   secret: string;
   sid: string;
   sig: string;
+  user?: VkUserData;
 }
 
-export interface VkLoginStatus {
+export interface VkStatus {
   session?: VkSession;
   status?: 'connected' | 'unknown' | 'not_authorized';
 }
@@ -142,11 +143,25 @@ export interface VkAuthRes {
   session: VkSession;
   uid: number;
 }
-export interface VkUserData extends VkLoginStatus{
+export interface VkUserData{
+  domain?: string;
   first_name?: string;
   hash?: string;
   last_name?: string;
   photo?: string;
   photo_rec?: string;
-  uid?: number;
+  href?: string;
+  id?: string;
+}
+export interface CreateWallPostReq {
+  v: number;
+  owner_id?: number; //by default current user
+  friends_only?: 1|0; //0
+  message: string;
+
+  /* <type><owner_id>_<media_id>,<type><owner_id>_<media_id>
+   *
+    * type: photo
+    * */
+  attachments?: string;
 }

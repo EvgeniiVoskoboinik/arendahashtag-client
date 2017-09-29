@@ -16,11 +16,18 @@ export class VkAuthComponent implements OnInit{
   }
 
   ngOnInit() {
-    VK.Widgets.Auth('vk_auth', {
-      onAuth: (res: VkAuthRes) => {
-        console.log(res);
-        this.sharedService.vkUserData = res;
-        },
-    });
+    // VK.Widgets.Auth('vk_auth', {
+    //   onAuth: (res: VkAuthRes) => {
+    //     console.log(res);
+    //     this.sharedService.vkUserData = res;
+    //     },
+    // });
+  }
+
+  login() {
+    VK.Auth.login(res => {
+      this.sharedService.vkUserData = res;
+      console.log(res);
+    }, 4 + 8192); // photos + wall
   }
 }
