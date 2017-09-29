@@ -39,11 +39,11 @@ export class AdFormComponent implements OnInit{
 
   get isRentSelected(): boolean {
     return this.adState.adType &&
-      (this.adState.adType[0] === AD_TYPES[0].id || this.adState.adType[0] === AD_TYPES[1].id);
+      (this.adState.adType[0] === AD_TYPES[0] || this.adState.adType[0] === AD_TYPES[1]);
   }
   get ispropertyContainsRooms(): boolean {
     return this.adState.propertyType &&
-      (this.adState.propertyType[0] === PROPERTY_TYPES[0].id || this.adState.propertyType[0] === PROPERTY_TYPES[1].id);
+      (this.adState.propertyType[0] === PROPERTY_TYPES[0] || this.adState.propertyType[0] === PROPERTY_TYPES[1]);
   }
 
   tabs: Tab[] = [
@@ -128,6 +128,7 @@ export class AdFormComponent implements OnInit{
         return {
           id: x.id,
           title: x.title,
+          tag: `#${x.id} #${x.title}`,
           description: description.trim(),
         };
       });

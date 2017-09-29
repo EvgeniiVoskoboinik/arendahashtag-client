@@ -2,14 +2,15 @@ import {Injectable} from '@angular/core';
 import {AdReducer} from './reducer';
 import {AdState, AdAction} from './interfaces';
 import {BehaviorSubject} from 'rxjs';
+import {ADVERTISER_TYPES, ROOMS_COUNT} from '../ad-state-items';
 
 const initialState: AdState = {
   city: null,
   adType: null,
   leaseTerm: null,
   propertyType: null,
-  roomsCount: ['no_matter'],
-  advertiser: ['no_matter'],
+  roomsCount: [ROOMS_COUNT[0]],
+  advertiser: [ADVERTISER_TYPES[0]],
   description: '',
 };
 

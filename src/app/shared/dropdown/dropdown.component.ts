@@ -43,8 +43,10 @@ export class DropdownComponent implements OnInit, OnDestroy{
 
   @Input() multiselection: boolean = false;
   @Input() @OnNew<DropdownComponent, string[]>(x => x.onNewMultiselected) selected: DropdownId[] = [];
+  @Input() @OnNew<DropdownComponent, string[]>(x => x.onNewMultiselectedItems) selectedItems: DropdownItem[] = [];
 
   @Output() selectedChange = new EventEmitter<DropdownId[]>();
+  @Output() selectedItemChange = new EventEmitter<DropdownItem[]>();
 
   allMultiselected: boolean = false;
   someMultiselected: boolean = false;
@@ -194,20 +196,21 @@ export class DropdownComponent implements OnInit, OnDestroy{
     }
   }
 
-  onItemClick(id: DropdownId, event: MouseEvent) {
+  onItemClick(item: DropdownItem, event: MouseEvent) {
     if (this.multiselection) {
       event.stopPropagation();
 
-      this.toggleMultiselect(id);
+      this.toggleMultiselect(item.id);
     } else {
-      this.select(id);
+      this.select(item);
     }
   }
 
 
-  private select(id: DropdownId) {
-    this.selected = [id];
+  private select(item: DropdownItem) {
+    this.selected = [item.id];
     this.selectedChange.emit(this.selected);
+    this.selectedItemChange.emit([item]);
   }
 
 
@@ -229,6 +232,11 @@ export class DropdownComponent implements OnInit, OnDestroy{
 
   onNewMultiselected() {
     this.selected = this.selected || [];
+
+    this.updateMultiselctProperties();
+  }
+  onNewMultiselectedItems() {
+    this.selected = this.selectedItems ? this.selectedItems.map(x => x.id) : [];
 
     this.updateMultiselctProperties();
   }

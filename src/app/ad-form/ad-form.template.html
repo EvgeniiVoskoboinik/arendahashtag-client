@@ -13,10 +13,10 @@
       [searching]="true"
       [clientSearching]="false"
       [items]="cities"
-      [selected]="adState.city"
+      [selectedItems]="adState.city"
       [searchDebounce]="300"
 
-      (selectedChange)="onSelectedChange('city', $event)"
+      (selectedItemChange)="onSelectedChange('city', $event)"
       (searchChange)="onCitySearchChange($event)"
     ></app-dropdown>
   </div>
@@ -27,8 +27,8 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="adTypes"
-      [selected]="adState.adType"
-      (selectedChange)="onSelectedChange('adType', $event)"
+      [selectedItems]="adState.adType"
+      (selectedItemChange)="onSelectedChange('adType', $event)"
     ></app-dropdown>
   </div>
 
@@ -38,8 +38,8 @@
       <app-dropdown
         [placeholder]="dropdownPlaceholder"
         [items]="leaseTerms"
-        [selected]="adState.leaseTerm"
-        (selectedChange)="onSelectedChange('leaseTerm', $event)"
+        [selectedItems]="adState.leaseTerm"
+        (selectedItemChange)="onSelectedChange('leaseTerm', $event)"
       ></app-dropdown>
     </ng-container>
   </div>
@@ -49,8 +49,8 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="propertyTypes"
-      [selected]="adState.propertyType"
-      (selectedChange)="onSelectedChange('propertyType', $event)"
+      [selectedItems]="adState.propertyType"
+      (selectedItemChange)="onSelectedChange('propertyType', $event)"
     ></app-dropdown>
   </div>
 
@@ -60,8 +60,8 @@
       <app-dropdown
         [placeholder]="dropdownPlaceholder"
         [items]="roomsCount"
-        [selected]="adState.roomsCount"
-        (selectedChange)="onSelectedChange('roomsCount', $event)"
+        [selectedItems]="adState.roomsCount"
+        (selectedItemChange)="onSelectedChange('roomsCount', $event)"
       ></app-dropdown>
     </ng-container>
   </div>
@@ -71,8 +71,8 @@
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="advertiserTypes"
-      [selected]="adState.advertiser"
-      (selectedChange)="onSelectedChange('advertiser', $event)"
+      [selectedItems]="adState.advertiser"
+      (selectedItemChange)="onSelectedChange('advertiser', $event)"
     ></app-dropdown>
   </div>
   <div class="form-item"></div>

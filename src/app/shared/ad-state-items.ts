@@ -3,22 +3,22 @@ import {AdStateItem} from './redux/interfaces';
 export const AD_TYPES: AdStateItem[] = [
   {
     id: 'findRent',
-    tag: 'сниму',
+    tag: '#сниму',
     title: 'Сниму',
   },
   {
     id: 'provideRent',
-    tag: 'сдам',
+    tag: '#сдам',
     title: 'Сдам',
   },
   {
     id: 'buy',
-    tag: 'куплю',
+    tag: '#куплю',
     title: 'Куплю',
   },
   {
     id: 'sell',
-    tag: 'продам',
+    tag: '#продам',
     title: 'Продам',
   },
 ];
@@ -26,32 +26,32 @@ export const AD_TYPES: AdStateItem[] = [
 export const PROPERTY_TYPES: AdStateItem[] = [
   {
     id: 'flat',
-    tag: 'квартира',
+    tag: '#квартира',
     title: 'Квартира',
   },
   {
     id: 'house',
-    tag: 'дом',
+    tag: '#дом',
     title: 'Дом',
   },
   {
     id: 'room',
-    tag: 'комната',
+    tag: '#комната',
     title: 'Комната',
   },
   {
     id: 'garage',
-    tag: 'гараж',
+    tag: '#гараж',
     title: 'Гараж',
   },
   {
     id: 'stead',
-    tag: 'участок',
+    tag: '#участок',
     title: 'Земельный участок',
   },
   {
     id: 'commercial',
-    tag: 'коммерческая_недвижимость',
+    tag: '#коммерческая_недвижимость',
     title: 'Комерческая недвижимость',
   },
 ];
@@ -59,12 +59,12 @@ export const PROPERTY_TYPES: AdStateItem[] = [
 export const LEASE_TERMS: AdStateItem[] = [
   {
     id: 'shortTerm',
-    tag: 'посуточно',
+    tag: '#посуточно',
     title: 'Посуточно',
   },
   {
     id: 'longTerm',
-    tag: 'на_длительный_срок',
+    tag: '#на_длительный_срок',
     title: 'На длительный срок',
   },
 ];
@@ -77,37 +77,37 @@ export const ROOMS_COUNT: AdStateItem[] = [
   },
   {
     id: 'studio',
-    tag: 'студия',
+    tag: '#студия',
     title: 'Студия',
   },
   {
     id: '1room',
-    tag: '1_комната',
+    tag: '#1_комната',
     title: '1 комната',
   },
   {
     id: '2rooms',
-    tag: '2_комнаты',
+    tag: '#2_комнаты',
     title: '2 комнаты',
   },
   {
     id: '3rooms',
-    tag: '3_комнаты',
+    tag: '#3_комнаты',
     title: '3 комнаты',
   },
   {
     id: '4room',
-    tag: '4_комнаты',
+    tag: '#4_комнаты',
     title: '4 комнаты',
   },
   {
     id: '5room',
-    tag: '5_комнат',
+    tag: '#5_комнат',
     title: '5 комнат',
   },
   {
     id: 'many_rooms',
-    tag: 'много_комнат',
+    tag: '#много_комнат',
     title: 'много комнат',
   },
 ];
@@ -120,12 +120,12 @@ export const ADVERTISER_TYPES: AdStateItem[] = [
   },
   {
     id: 'owner',
-    tag: 'собственник',
+    tag: '#собственник',
     title: 'Собственник',
   },
   {
     id: 'agency',
-    tag: 'агентство',
+    tag: '#агентство',
     title: 'Агентство',
   },
 ];

@@ -4,12 +4,12 @@ export interface AdStateItem{
   title: string;
 }
 export interface AdState{
-  adType: string[];
-  propertyType: string[];
-  city: string[];
-  leaseTerm: string[];
-  roomsCount: string[];
-  advertiser: string[];
+  adType: AdStateItem[];
+  propertyType: AdStateItem[];
+  city: AdStateItem[];
+  leaseTerm: AdStateItem[];
+  roomsCount: AdStateItem[];
+  advertiser: AdStateItem[];
   description: string;
 }
 export interface AdAction{
