@@ -82,11 +82,13 @@ export class AdFormComponent implements OnInit{
     };
 
     VK.Api.call('wall.post', params, data => {
-      let res: {post_id: number} = data.response;
+      let {error, response} = data;
+
+      if (error) return;
 
       this.zone.run(() => {
         this.router.navigate(['/post_result'], {
-          queryParams: res,
+          queryParams: response,
         });
       });
     });
