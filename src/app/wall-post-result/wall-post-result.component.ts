@@ -1,5 +1,4 @@
-import {Component, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {} from '../shared/interfaces';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../shared/base-component';
 import  {FeedItem} from '../shared/interfaces/feedItem';
@@ -26,7 +25,6 @@ export class WallPostResultComponent extends BaseComponent{
   }
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private sharedService: SharedService,
   ) {
