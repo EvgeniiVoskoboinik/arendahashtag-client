@@ -1,11 +1,10 @@
 <app-tabset [@fadeIn]="''" [@slideLeft]="''"
-            [selectedKey]="selectedTab.key"
             (select)="onTabSelected($event)">
   <app-tab *ngFor="let tab of tabs"
            [key]="tab.key">{{ tab.name }}</app-tab>
 </app-tabset>
 
-<div *ngIf="!needAuth" class="form-container">
+<div *ngIf="selectedTab" class="form-container">
   <div class="form-item">
     <h4>Населенный пункт</h4>
     <app-dropdown

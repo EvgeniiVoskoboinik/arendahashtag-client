@@ -20,6 +20,8 @@ export class SharedService{
   }
 
   private getLoginStatus() {
+    if (this.vkUserData) return;
+
     VK.Auth.getLoginStatus((res: VkStatus) => {
       console.log(res);
 

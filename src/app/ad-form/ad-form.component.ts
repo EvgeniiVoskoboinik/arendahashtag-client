@@ -58,7 +58,7 @@ export class AdFormComponent implements OnInit{
       buttonTitle: 'Продолжить',
     },
   ];
-  selectedTab: Tab = this.tabs[0];
+  selectedTab: Tab;
 
   constructor(
     private sharedService: SharedService,
