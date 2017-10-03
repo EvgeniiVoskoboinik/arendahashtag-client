@@ -25,6 +25,8 @@ export class PostListComponent extends BaseComponent{
     this.adStateStore.state$
       .takeUntil(this.destroyed$)
       .subscribe(state => {
+        if (!state) return;
+
         this.adState = state;
         this.loadPosts();
       });

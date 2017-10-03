@@ -5,7 +5,7 @@ import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class AdStateStore{
-  private readonly adStateSubject = new BehaviorSubject<AdState>(INITIAL_STATE);
+  private readonly adStateSubject = new BehaviorSubject<AdState>(null);
 
   state$ = this.adStateSubject.asObservable();
   get state(): AdState {
