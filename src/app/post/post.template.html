@@ -20,5 +20,7 @@
       [innerHTML]="post.text"
     ></pre>
   </div>
-  <div class="post-attachments"></div>
+  <div class="post-attachments" *ngIf="galleryImages">
+    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+  </div>
 </div>

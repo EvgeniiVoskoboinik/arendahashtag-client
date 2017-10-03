@@ -11,7 +11,7 @@
       "allow-named-functions"
     ],
     "typedef": [
-      true,
+      false,
       "parameter",
       "property-declaration"
     ],
@@ -71,7 +71,7 @@
     "no-default-export": true,
     "no-mergeable-namespace": true,
     "trailing-comma": [
-      true,
+      false,
       {
         "multiline": "always",
         "singleline": "never"
@@ -89,7 +89,7 @@
       "array"
     ],
     "arrow-parens": [
-      true,
+      false,
       "ban-single-arg-parens"
     ],
     "arrow-return-shorthand": true,

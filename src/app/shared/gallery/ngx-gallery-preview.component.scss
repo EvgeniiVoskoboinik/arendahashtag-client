@@ -1,0 +1,89 @@
+:host(.ngx-gallery-active) {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    display: inline-block;
+
+    /deep/ .ngx-gallery-icon.ngx-gallery-arrow {
+        font-size: 50px;
+    }
+}
+
+:host {
+    display: none;
+}
+
+.ngx-gallery-preview-img {
+    opacity: 0;
+    max-width: 90%;
+    max-height: 90%;
+    transition: opacity 0.5s ease-in-out;
+
+    &.ngx-gallery-active {
+        opacity: 1;
+    }
+}
+
+.ngx-gallery-icon.ngx-gallery-spinner {
+    font-size: 50px;
+    left: 0px;
+    display: inline-block;
+}
+
+.ngx-gallery-icon.ngx-gallery-close {
+    right: 10px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.ngx-gallery-icon.ngx-gallery-fullscreen {
+    top: 13px;
+    right: 50px;
+    cursor: pointer;
+}
+
+.ngx-spinner-wrapper {
+    width: 50px;
+    height: 50px;
+    display: none;
+
+    &.ngx-gallery-active {
+        display: inline-block;
+    }
+}
+
+.ngx-gallery-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    top: 0;
+}
+
+.ngx-gallery-preview-text {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    flex: 0 1 auto;
+}
+
+.ngx-gallery-preview-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.ngx-gallery-preview-img-wrapper {
+    flex: 1 1 auto;
+    position: relative;
+}
