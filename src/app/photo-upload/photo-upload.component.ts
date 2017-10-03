@@ -24,7 +24,7 @@ export class PhotoUploadComponent{
       return this.selectedFiles[0].name;
     }
     if (this.inputErr) {
-      return 'Не более 5 фотографий';
+      return 'Слишком много фотографий (не более 5)';
     }
     return `Выбрано фотографий: ${this.selectedFiles.length}`;
   }
