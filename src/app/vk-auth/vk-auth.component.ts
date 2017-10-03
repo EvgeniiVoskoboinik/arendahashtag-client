@@ -2,7 +2,6 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 import {VkAuthRes} from '../shared/interfaces/vk.api.interfaces';
 
-
 @Component({
   selector: 'app-vk-auth',
    templateUrl: './vk-auth.template.html',

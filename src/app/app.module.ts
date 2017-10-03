@@ -18,6 +18,7 @@ import {PostComponent} from './post/post.component';
 import {PostListComponent} from './post-list/post-list.component';
 import {WallPostResultComponent} from './wall-post-result/wall-post-result.component';
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
+import {PhotoUploadComponent} from './photo-upload/photo-upload.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {DropdownComponent} from './shared/dropdown/dropdown.component';
     PostComponent,
     PostListComponent,
     WallPostResultComponent,
+    PhotoUploadComponent,
 
     DropdownComponent,
   ],

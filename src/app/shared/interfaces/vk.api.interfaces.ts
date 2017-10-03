@@ -1,3 +1,7 @@
+export interface BaseRes<T> {
+  error: any;
+  response: T;
+}
 export interface DbReq{
   need_all?: 1|0;
   offset?: number;

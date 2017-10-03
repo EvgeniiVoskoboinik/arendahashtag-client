@@ -1,13 +1,13 @@
 import {
   Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone,
 } from '@angular/core';
-import {SharedService} from '../shared/shared.service';
 import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT} from '../shared/ad-state-items';
 import {Router} from '@angular/router';
 import {AdStateStore, EditValueAction, Actions, AdState} from '../shared/redux';
-import {CitiesReq, CreateWallPostReq} from '../shared/interfaces/vk.api.interfaces';
+import {CitiesReq} from '../shared/interfaces/vk.api.interfaces';
 import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
+import {CreatePostService} from './create-post.service';
 
 export type TabKey = string;
 
@@ -23,6 +23,7 @@ export interface Tab {
   styleUrls: ['./ad-form.style.scss'],
   animations: AD_FORM_ANIMATIONS,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [CreatePostService],
 })
 export class AdFormComponent implements OnInit{
 
@@ -36,6 +37,7 @@ export class AdFormComponent implements OnInit{
   adState: AdState;
   dropdownPlaceholder = 'Не выбрано';
 
+  private files: FileList;
 
   get isRentSelected(): boolean {
     return this.adState.adType &&
@@ -61,13 +63,11 @@ export class AdFormComponent implements OnInit{
   selectedTab: Tab;
 
   constructor(
-    private sharedService: SharedService,
     private router: Router,
     private adStateStore: AdStateStore,
     private changeDetectorRef: ChangeDetectorRef,
-    private vkApiService: VkApiService,
     private zone: NgZone,
-
+    private createPostService: CreatePostService,
   ) {
     this.adStateStore.state$
       .subscribe(state => {
@@ -76,24 +76,18 @@ export class AdFormComponent implements OnInit{
   }
 
   private postAd() {
-    let params: CreateWallPostReq = {
-      message: this.vkApiService.createWallPostMessage(this.adState),
-      v: VK_API_VERSION,
-    };
+    this.createPostService.createWallPost(this.adState, this.files)
+      .then(data => {
+        let {error, response} = data;
+        if (error) return;
 
-    VK.Api.call('wall.post', params, data => {
-      let {error, response} = data;
-
-      if (error) return;
-
-      this.zone.run(() => {
-        this.adStateStore.dispatch({type: Actions.ResetState});
-        this.router.navigate(['/post_result'], {
-          queryParams: response,
+        this.zone.run(() => {
+          this.adStateStore.dispatch({type: Actions.ResetState});
+          this.router.navigate(['/post_result'], {
+            queryParams: response,
+          });
         });
       });
-    });
-
   }
 
   private findAd() {
@@ -151,6 +145,10 @@ export class AdFormComponent implements OnInit{
       });
       this.changeDetectorRef.detectChanges();
     });
+  }
+
+  onFileChange(files: FileList) {
+    this.files = files;
   }
 
   ngOnInit() {

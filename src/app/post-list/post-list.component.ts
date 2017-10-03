@@ -27,11 +27,9 @@ export class PostListComponent implements OnDestroy{
     this.adStateStore.state$
       .takeUntil(this.destroyed$)
       .subscribe(state => {
-        console.log(state);
         this.adState = state;
         this.loadPosts();
       });
-
   }
 
   private loadPosts() {

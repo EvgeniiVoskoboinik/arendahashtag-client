@@ -83,6 +83,11 @@
     placeholder="Текст объявления"
   ></textarea>
 
+  <app-photo-upload
+    *ngIf="selectedTab.key === 'create'"
+    (fileChange)="onFileChange($event)"
+  ></app-photo-upload>
+
   <div class="full-width next-button-container">
     <button class="btn btn-main pull-right"
             (click)="onClickNext()"
