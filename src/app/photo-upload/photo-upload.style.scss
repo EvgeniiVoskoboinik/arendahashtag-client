@@ -1,0 +1,59 @@
+:host{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: relative;
+
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .inputfile + label {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    color: #196EBD;
+    font-family: inherit;
+    background-color: white;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 0;
+    border: 1px solid white;
+
+    &.error {
+      color: #e1665a!important;
+      background-color: white!important;
+      border-color: #e1665a;
+    }
+  }
+
+  .inputfile:focus + label,
+  .inputfile + label:hover {
+    background-color: #196EBD;
+    color: white;
+  }
+
+  .inputfile:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+
+
+  .fa-times {
+    font-size: 2em;
+    position: absolute;
+    right: -25px;
+    top: 6px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -9,9 +9,31 @@ import {Component, ChangeDetectionStrategy, Output, EventEmitter} from '@angular
 export class PhotoUploadComponent{
   @Output() fileChange = new EventEmitter<FileList>();
 
+  selectedFiles: any = [];
   constructor() {}
 
+  get inputErr(): boolean {
+    return this.selectedFiles.length > 5;
+  }
+
+  get fileInputTitle(): string {
+    if (!this.selectedFiles.length) {
+      return 'Выбрать фотографии (не более 5)';
+    }
+    if (this.selectedFiles.length === 1) {
+      return this.selectedFiles[0].name;
+    }
+    if (this.inputErr) {
+      return 'Не более 5 фотографий';
+    }
+    return `Выбрано фотографий: ${this.selectedFiles.length}`;
+  }
+
   onFileChange(event: any) {
-    this.fileChange.emit(event.target.files);
+    let files = event.target.files;
+    if (files.length === 0) return;
+
+    this.selectedFiles = files;
+    this.fileChange.emit(files);
   }
 }
