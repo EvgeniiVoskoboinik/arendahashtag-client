@@ -1,10 +1,9 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {SharedService} from '../shared/shared.service';
+import {Component, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {FeedSearchReq, FeedSearchRes} from '../shared/interfaces/vk.api.interfaces';
 import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
-import {Subject} from 'rxjs';
 import {AdStateStore, AdState} from '../shared/redux';
 import {FeedItem} from '../shared/interfaces/feedItem';
+import {BaseComponent} from '../shared/base-component';
 
 @Component({
              selector: 'app-post-list',
@@ -12,18 +11,17 @@ import {FeedItem} from '../shared/interfaces/feedItem';
              styleUrls: ['./post-list.style.scss'],
              changeDetection: ChangeDetectionStrategy.OnPush,
            })
-export class PostListComponent implements OnDestroy{
+export class PostListComponent extends BaseComponent{
   private adState: AdState;
-  private destroyed$ = new Subject<void>();
-
   posts: FeedItem[];
 
   constructor(
-    private sharedService: SharedService,
     private vkApiService: VkApiService,
     private adStateStore: AdStateStore,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
+    super();
+
     this.adStateStore.state$
       .takeUntil(this.destroyed$)
       .subscribe(state => {
@@ -46,10 +44,5 @@ export class PostListComponent implements OnDestroy{
       this.changeDetectorRef.markForCheck();
       this.changeDetectorRef.detectChanges();
     });
-  }
-
-  ngOnDestroy() {
-    this.destroyed$.next();
-    this.destroyed$.complete();
   }
 }

@@ -1,5 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {SharedService} from '../shared/shared.service';
+import {Component, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FeedItem} from '../shared/interfaces/feedItem';
 import {NgxGalleryImage, NgxGalleryOptions} from '../shared/gallery';
 
@@ -9,7 +8,7 @@ import {NgxGalleryImage, NgxGalleryOptions} from '../shared/gallery';
              styleUrls: ['./post.style.scss'],
              changeDetection: ChangeDetectionStrategy.OnPush,
            })
-export class PostComponent implements OnInit, OnChanges{
+export class PostComponent implements OnChanges{
   @Input() post: FeedItem;
 
   galleryOptions: NgxGalleryOptions[] = [
@@ -18,14 +17,7 @@ export class PostComponent implements OnInit, OnChanges{
   ];
   galleryImages: NgxGalleryImage[];
 
-  constructor(
-    private sharedService: SharedService,
-  ) {
-  }
-
-  ngOnInit() {
-
-  }
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     let {post} = changes;
