@@ -61,6 +61,7 @@ export class AdFormComponent implements OnInit{
     },
   ];
   selectedTab: Tab;
+  requiredError: string;
 
   constructor(
     private router: Router,
@@ -96,6 +97,7 @@ export class AdFormComponent implements OnInit{
 
 
   onTabSelected(key: string) {
+    if (this.requiredError) this.requiredError = null;
     this.selectedTab = this.tabs.find(tab => tab.key === key);
   }
 
@@ -104,6 +106,11 @@ export class AdFormComponent implements OnInit{
   }
 
   onClickNext() {
+    if (!this.isCorrectInputs()) {
+      this.requiredError = 'Не все обязательные поля заполнены';
+      return;
+    }
+
     if (this.selectedTab.key === 'create') {
       this.postAd();
     } else {
@@ -111,7 +118,19 @@ export class AdFormComponent implements OnInit{
     }
   }
 
+  private isCorrectInputs(): boolean {
+    if (this.isRentSelected && !this.adState.leaseTerm) return false;
+
+    return Boolean(
+      this.adState.city
+      && this.adState.adType
+      && this.adState.propertyType
+    );
+  }
+
   private changeStateValue(key: string, value: any) {
+    if (this.requiredError) this.requiredError = null;
+
     let action: EditValueAction = {
       type: Actions.SetValue,
       key,

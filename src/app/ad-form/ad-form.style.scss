@@ -41,7 +41,15 @@
     }
 
     .next-button-container{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       margin-top: 30px;
+
+      .error-container{
+        font-size: 1.3em;
+        margin-right: 16px;
+      }
     }
   }
 }
