@@ -58,16 +58,16 @@ button.app-button {
   }
 }
 
-.btn-main {
+.btn-main,
+.btn-main:focus {
   color: #ffffff;
   background-color: #196EBD;
   border-color: #ffffff;
 }
 
 .btn-main:hover,
-.btn-main:focus,
-.btn-main:active,
-.btn-main.active,
+//.btn-main:active,
+//.btn-main.active,
 .open .dropdown-toggle.btn-main {
   color: #196EBD !important;
   background-color: #ffffff;
