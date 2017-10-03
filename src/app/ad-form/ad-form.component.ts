@@ -62,6 +62,7 @@ export class AdFormComponent implements OnInit{
   ];
   selectedTab: Tab;
   requiredError: string;
+  loading: boolean = false;
 
   constructor(
     private router: Router,
@@ -111,6 +112,8 @@ export class AdFormComponent implements OnInit{
       return;
     }
 
+    this.loading = true;
+    this.changeDetectorRef.detectChanges();
     if (this.selectedTab.key === 'create') {
       this.postAd();
     } else {

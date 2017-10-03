@@ -69,7 +69,7 @@ button.app-button {
 //.btn-main:active,
 //.btn-main.active,
 .open .dropdown-toggle.btn-main {
-  color: #196EBD !important;
+  color: #196EBD;
   background-color: #ffffff;
   border-color: #ffffff;
 }
@@ -97,4 +97,5 @@ fieldset[disabled] .btn-main:active,
 fieldset[disabled] .btn-main.active {
   background-color: #196EBD;
   border-color: #ffffff;
+  color: #ffffff;
 }
