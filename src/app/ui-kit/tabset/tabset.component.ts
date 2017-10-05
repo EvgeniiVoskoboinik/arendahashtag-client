@@ -44,7 +44,9 @@ export class TabsetComponent implements AfterViewInit, AfterContentInit {
             Observable.merge(this.tabsReady$, this.tabs.changes),
         )
         .subscribe(() => {
+          setTimeout(() => {
             this.onTabsChages();
+          }, 100);
         });
     }
     private onTabsChages() {
@@ -56,7 +58,7 @@ export class TabsetComponent implements AfterViewInit, AfterContentInit {
           selectedTab.active = true;
           setTimeout(() => {
             this.changeDetectorRef.markForCheck();
-          });
+          }, 0);
           selectedTab.changeDetectorRef.detectChanges();
         }
 

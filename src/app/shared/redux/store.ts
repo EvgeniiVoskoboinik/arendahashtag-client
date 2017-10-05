@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AdReducer, INITIAL_STATE} from './reducer';
+import {AdReducer} from './reducer';
 import {AdState, AdAction} from './interfaces';
 import {BehaviorSubject} from 'rxjs';
 

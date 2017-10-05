@@ -1,4 +1,5 @@
 <app-tabset [@fadeIn]="''" [@slideLeft]="''"
+            [selectedKey]="selectedTab?.key"
             (select)="onTabSelected($event)">
   <app-tab *ngFor="let tab of tabs"
            [key]="tab.key">{{ tab.name }}</app-tab>

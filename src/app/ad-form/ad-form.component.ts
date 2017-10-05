@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone,
+  Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, Input, OnChanges, SimpleChanges,
 } from '@angular/core';
 import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT} from '../shared/ad-state-items';
@@ -25,7 +25,8 @@ export interface Tab {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CreatePostService],
 })
-export class AdFormComponent implements OnInit{
+export class AdFormComponent implements OnInit, OnChanges{
+  @Input() tab: string;
 
   cities;
   adTypes = AD_TYPES;
@@ -50,7 +51,7 @@ export class AdFormComponent implements OnInit{
 
   tabs: Tab[] = [
     {
-      key: 'find',
+      key: 'search',
       name: 'Найти объявление',
       buttonTitle: 'Найти',
     },
@@ -126,6 +127,9 @@ export class AdFormComponent implements OnInit{
   onTabSelected(key: string) {
     if (this.errorMsg) this.errorMsg = null;
     this.selectedTab = this.tabs.find(tab => tab.key === key);
+    this.router.navigate([`/home`], {
+      queryParams: {a: this.selectedTab.key},
+    });
   }
 
   onSelectedChange(key: string, value: any) {
@@ -213,5 +217,13 @@ export class AdFormComponent implements OnInit{
 
   ngOnInit() {
     this.onCitySearchChange();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let {tab} = changes;
+
+    if (tab && tab.currentValue) {
+      this.selectedTab = this.tabs.find(x => x.key === this.tab);
+    }
   }
 }

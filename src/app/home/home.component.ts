@@ -1,18 +1,17 @@
 import {Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit} from '@angular/core';
-import {HOME_ANIMATIONS} from './home.animation';
 import {SharedService} from '../shared/shared.service';
 import {VkStatus} from '../shared/interfaces/vk.api.interfaces';
 import {AdStateStore, Actions} from '../shared/redux';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.template.html',
   styleUrls: ['./home.component.scss'],
-  providers: [],
-  animations: HOME_ANIMATIONS,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit{
+  tab: string;
 
   get needAuth(): boolean {
     let status = this.sharedService.vkUserData;
@@ -27,6 +26,7 @@ export class HomeComponent implements OnInit{
     private changeDetectorRef: ChangeDetectorRef,
     private sharedService: SharedService,
     private adStateStore: AdStateStore,
+    private activatedRoute: ActivatedRoute,
     ) {
       this.sharedService.vkUserData$
         .skip(1)
@@ -39,5 +39,6 @@ export class HomeComponent implements OnInit{
       if (!this.adStateStore.state) {
         this.adStateStore.dispatch({type: Actions.ResetState});
       }
+      this.tab = this.activatedRoute.snapshot.queryParams['a'];
     }
 }
