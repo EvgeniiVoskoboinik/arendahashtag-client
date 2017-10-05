@@ -29,6 +29,7 @@ export class TabsetComponent implements AfterViewInit, AfterContentInit {
     private tabsReady$ = new ReplaySubject<void>(1);
 
     constructor(private changeDetectorRef: ChangeDetectorRef) {
+      /* experimental */
         this.fontsReady$ = Observable.fromPromise((<any>document).fonts.load(ACTIVE_FONT));
     }
 
@@ -46,7 +47,7 @@ export class TabsetComponent implements AfterViewInit, AfterContentInit {
         .subscribe(() => {
           setTimeout(() => {
             this.onTabsChages();
-          }, 100);
+          }, 1000);
         });
     }
     private onTabsChages() {
