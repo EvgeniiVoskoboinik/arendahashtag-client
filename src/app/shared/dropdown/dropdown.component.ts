@@ -9,9 +9,9 @@ import {
   ViewChild,
   ElementRef, OnDestroy,
 } from '@angular/core';
-import {FormControl} from '@angular/forms';
 import {DropdownId, DropdownItem} from './dropdown-item';
 import {OnNew} from '../misc/on-new.decorator';
+import {Subject} from 'rxjs';
 
 export const DEFAULT_SEARCH_DEBOUNCE = 50;
 export const MAX_TITLES_TO_DISPLAY_FOR_MULTISELECTED = 10;
@@ -75,7 +75,7 @@ export class DropdownComponent implements OnInit, OnDestroy{
    */
   @Output() searchChange = new EventEmitter<string>();
   search: string = '';
-  searchControl = new FormControl();
+  searchSubject$ = new Subject<string>();
 
   /**
    * Fires when dropdown gains focus
@@ -119,9 +119,7 @@ export class DropdownComponent implements OnInit, OnDestroy{
 
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
-  ) {
-
-  }
+  ) {}
 
   onNewItems() {
     this.prepareItems();
@@ -141,9 +139,12 @@ export class DropdownComponent implements OnInit, OnDestroy{
     this.updateMultiselctProperties();
   }
 
+  onSearchChange(search: string) {
+    this.searchSubject$.next(search);
+  }
 
-  private setupSearch() {
-    this.searchControl.valueChanges
+  setupSearch() {
+    this.searchSubject$
       .skip(1)
       .debounceTime(this.searchDebounce)
       .distinctUntilChanged()
