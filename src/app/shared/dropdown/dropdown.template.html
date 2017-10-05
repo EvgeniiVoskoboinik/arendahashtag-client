@@ -23,7 +23,7 @@
          *ngIf="searching"
          (click)="$event.stopPropagation();"
     >
-      <input #searchInput type="text" name="search" placeholder="Search..." autocomplete="off"
+      <input #searchInput type="text" name="search" placeholder="Поиск..." autocomplete="off"
              [(ngModel)]="search"
 
              (ngModelChange)="onSearchChange($event)"
@@ -46,7 +46,7 @@
       </li>
     </ul>
     <span class="dropdown-no-items" *ngIf="!visibleItems.length && !loading">
-            {{ search ? 'No items found' : 'No items' }}{{ searchError ? ':' : ''}} <span
+            {{ search ? 'Ничего не найдено' : 'Здесь ничего нет' }}{{ searchError ? ':' : ''}} <span
       class="dropdown-no-items-error">{{ searchError }}</span>
     </span>
   </div>
