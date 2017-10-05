@@ -38,12 +38,12 @@ export class DropdownComponent implements OnInit, OnDestroy{
   /**
    * Items to show
    */
-  @Input() @OnNew<DropdownComponent, DropdownItem[]>(x => x.onNewItems) items: DropdownItem[];
-  @OnNew<DropdownComponent, DropdownItem[]>(x => x.onNewVisibleItems) visibleItems: DropdownItem[] = [];
+  @Input() @OnNew<DropdownComponent, DropdownItem[]>('onNewItems') items: DropdownItem[];
+  @OnNew<DropdownComponent, DropdownItem[]>('onNewVisibleItems') visibleItems: DropdownItem[] = [];
 
   @Input() multiselection: boolean = false;
-  @Input() @OnNew<DropdownComponent, string[]>(x => x.onNewMultiselected) selected: DropdownId[] = [];
-  @Input() @OnNew<DropdownComponent, string[]>(x => x.onNewMultiselectedItems) selectedItems: DropdownItem[] = [];
+  @Input() @OnNew<DropdownComponent, string[]>('onNewMultiselected') selected: DropdownId[] = [];
+  @Input() @OnNew<DropdownComponent, string[]>('onNewMultiselectedItems') selectedItems: DropdownItem[] = [];
 
   @Output() selectedChange = new EventEmitter<DropdownId[]>();
   @Output() selectedItemChange = new EventEmitter<DropdownItem[]>();
