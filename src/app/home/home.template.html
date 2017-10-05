@@ -2,3 +2,8 @@
   [tab]="tab"
 ></app-ad-form>
 <app-vk-auth *ngIf="needAuth"></app-vk-auth>
+<div class="spinner" *ngIf="!vkUSerData">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
