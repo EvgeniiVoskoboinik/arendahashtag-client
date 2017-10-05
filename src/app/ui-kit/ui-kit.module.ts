@@ -4,8 +4,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {InputLayoutComponent} from './input-layout/input-layout.component';
-import {SearchSelectComponent} from './search-select/search-select.component';
-import {OffClickDirective} from './search-select/off-click';
 import {TabsetComponent} from './tabset/tabset.component';
 import {TabComponent} from './tabset/tab/tab.component';
 import {CheckboxComponent} from './checkbox/checkbox.component';
@@ -19,8 +17,6 @@ import {CheckboxComponent} from './checkbox/checkbox.component';
   ],
   declarations: [
     InputLayoutComponent,
-    SearchSelectComponent,
-    OffClickDirective,
     TabsetComponent,
     TabComponent,
     CheckboxComponent,
@@ -28,8 +24,6 @@ import {CheckboxComponent} from './checkbox/checkbox.component';
   entryComponents: [],
   exports: [
     InputLayoutComponent,
-    SearchSelectComponent,
-    OffClickDirective,
     TabsetComponent,
     TabComponent,
     CheckboxComponent,
