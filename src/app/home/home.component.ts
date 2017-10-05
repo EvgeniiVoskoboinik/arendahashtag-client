@@ -30,12 +30,14 @@ export class HomeComponent implements OnInit{
     ) {
       this.sharedService.vkUserData$
         .skip(1)
-        .subscribe(__ => {
+        .subscribe(() => {
           this.changeDetectorRef.detectChanges();
         });
     }
 
     ngOnInit() {
-      this.adStateStore.dispatch({type: Actions.ResetState});
+      if (!this.adStateStore.state) {
+        this.adStateStore.dispatch({type: Actions.ResetState});
+      }
     }
 }

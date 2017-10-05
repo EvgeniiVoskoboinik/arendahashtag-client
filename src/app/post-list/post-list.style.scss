@@ -20,4 +20,19 @@
     left: 24px;
     top: calc(50% - 16px);
   }
+
+  .nothing-container{
+    width: 100%;
+    text-align: center;
+
+    a{
+      color: white!important;
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+  }
 }

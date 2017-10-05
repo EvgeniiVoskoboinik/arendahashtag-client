@@ -1,10 +1,14 @@
-<div class="post-container" *ngIf="posts">
+<div class="post-container" *ngIf="posts && posts.length">
   <div class="post-item" *ngFor="let post of posts">
   <app-post
     [post]="post"
   ></app-post>
   </div>
 </div>
-<a [routerLink]="['/home']" class="back-button" title="Изменить запрос">
+<a [routerLink]="['/']" class="back-button" title="Изменить запрос">
   <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
 </a>
+<div class="nothing-container" *ngIf="posts && !posts.length">
+  <h2>Ничего не найдено :(</h2>
+  <a [routerLink]="['/']">Изменить параметры поиска</a>
+</div>

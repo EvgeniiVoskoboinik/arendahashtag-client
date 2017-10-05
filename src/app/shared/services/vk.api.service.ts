@@ -1,8 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs';
-
-import {CountriesReq, VkCountry} from '../interfaces';
 import {AdState, AdStateItem} from '../redux/interfaces';
 
 export const VK_API_VERSION = 6.68;
@@ -10,15 +6,7 @@ export const VK_API_VERSION = 6.68;
 @Injectable()
 export class VkApiService{
 
-  constructor(private http: Http) {
-
-  }
-
-  getCountries(params: CountriesReq): Observable<VkCountry> {
-    return VK.Api.call('database.getCountries', params, data => {
-        return Observable.of(data.response);
-    });
-  }
+  constructor() {}
 
   createSearchQuery(adState: AdState): string {
     return this.createHashtagString(adState);
