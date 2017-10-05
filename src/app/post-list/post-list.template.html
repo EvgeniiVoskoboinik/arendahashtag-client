@@ -12,3 +12,8 @@
   <h2>Ничего не найдено :(</h2>
   <a [routerLink]="['/home']" [queryParams]="{a: 'search'}">Изменить параметры поиска</a>
 </div>
+<div class="spinner" *ngIf="!posts">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
