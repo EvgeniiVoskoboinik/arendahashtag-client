@@ -64,6 +64,11 @@ export class AdFormComponent implements OnInit{
   requiredError: string;
   loading: boolean = false;
 
+  attachmentsLoading: boolean = false;
+  attachmentsLoaded: boolean = true;
+
+  private attachments: string = null;
+
   constructor(
     private router: Router,
     private adStateStore: AdStateStore,
@@ -77,18 +82,37 @@ export class AdFormComponent implements OnInit{
       });
   }
 
-  private postAd() {
-    this.createPostService.createWallPost(this.adState, this.files)
-      .then(data => {
-        let {error, response} = data;
-        if (error) return;
+  loadAttachments() {
+    this.attachmentsLoading = true;
+    this.createPostService.loadAttachments(this.files)
+      .then(attachments => {
+        this.zone.run(() => {
+          this.attachments = attachments;
+          this.attachmentsLoading = false;
+          this.attachmentsLoaded = true;
+          this.changeDetectorRef.detectChanges();
+        });
+      }, error => {
+        console.error(error.error_msg);
+        this.attachmentsLoading = false;
+        this.changeDetectorRef.detectChanges();
+      });
+  }
 
+  private postAd() {
+    this.loading = true;
+    this.createPostService.post(this.adState, this.attachments)
+      .then(data => {
         this.zone.run(() => {
           this.adStateStore.dispatch({type: Actions.ResetState});
           this.router.navigate(['/post_result'], {
-            queryParams: response,
+            queryParams: data,
           });
         });
+      }, error => {
+        console.error(error.error_msg);
+        this.loading = false;
+        this.changeDetectorRef.detectChanges();
       });
   }
 
@@ -109,6 +133,11 @@ export class AdFormComponent implements OnInit{
   onClickNext() {
     if (!this.isCorrectInputs()) {
       this.requiredError = 'Не все обязательные поля заполнены';
+      return;
+    }
+
+    if (!this.attachmentsLoaded) {
+      this.requiredError = 'Вы забыли загрузить фотографии';
       return;
     }
 
@@ -171,6 +200,13 @@ export class AdFormComponent implements OnInit{
 
   onFileChange(files: FileList) {
     this.files = files;
+
+    if (!files.length) {
+      this.attachments = null;
+      this.attachmentsLoaded = true;
+    } else {
+      this.attachmentsLoaded = false;
+    }
   }
 
   ngOnInit() {

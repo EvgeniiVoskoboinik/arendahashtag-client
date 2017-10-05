@@ -40,6 +40,14 @@
       width: 100%;
     }
 
+    .button-container{
+      text-align: right;
+      margin-top: 8px;
+
+      button{
+        min-width: 140px;
+      }
+    }
     .next-button-container{
       display: flex;
       justify-content: flex-end;

@@ -23,8 +23,6 @@ export class SharedService{
     if (this.vkUserData) return;
 
     VK.Auth.getLoginStatus((res: VkStatus) => {
-      console.log(res);
-
       /* if need get user data */
       // if (res.status === 'connected') {
       //   VK.Api.call('users.get', {}, data => {});

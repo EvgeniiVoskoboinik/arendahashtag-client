@@ -35,68 +35,58 @@ export class CreatePostService{
     private vkApiService: VkApiService,
     private http: Http,
     private sharedService: SharedService,
-  ) {
+  ) {}
 
-  }
+  loadAttachments(files: FileList): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (!files || !files.length) return resolve(null);
 
-  createWallPost(adState: AdState, files: FileList): Promise<any> {
-    if (files && files.length > 0) {
       let params: GetWallUploadServerReq = {v: 5.68};
 
-      return new Promise((resolve, reject) => {
-        VK.Api.call('photos.getWallUploadServer', params, (uploadServer: BaseRes<GetWallUploadServerRes>) => {
-          let formData: FormData = new FormData();
-          for (let i = 0; i < files.length; i++) {
-            formData.append(`file${i + 1}`, files[i], files[i].name);
-          }
-          this.http.post('/api/uploadPhotos?server=' + encodeURIComponent(uploadServer.response.upload_url),
-            formData)
-            .map(x => x.json())
-            .subscribe(
-              metaJson => {
-                const req = {
-                  user_id: this.sharedService.vkUserData.session.mid,
-                  ...JSON.parse(metaJson),
-                  v: VK_API_VERSION,
-                };
-                VK.Api.call('photos.saveWallPhoto', req, (loadedItemsRes: BaseRes<SaveWallPhotoItem[]>) => {
-                  const {error, response} = loadedItemsRes;
-                  if (error) return reject(error);
+      VK.Api.call('photos.getWallUploadServer', params, (uploadServer: BaseRes<GetWallUploadServerRes>) => {
+        let formData: FormData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+          formData.append(`file${i + 1}`, files[i], files[i].name);
+        }
+        this.http.post('/api/uploadPhotos?server=' + encodeURIComponent(uploadServer.response.upload_url), formData)
+          .map(x => x.json())
+          .subscribe(metaJson => {
+             const req = {
+               user_id: this.sharedService.vkUserData.session.mid,
+               ...JSON.parse(metaJson),
+               v: VK_API_VERSION,
+             };
+             VK.Api.call('photos.saveWallPhoto', req, (loadedItemsRes: BaseRes<SaveWallPhotoItem[]>) => {
+               const {error, response} = loadedItemsRes;
+               if (error) return reject(error);
 
-                  const attachments: string = response
-                    .map(loadedItem => `photo${loadedItem.owner_id}_${loadedItem.id}`)
-                    .join(',');
-
-                  this.post(adState, attachments, data => {
-                    resolve(data);
-                  });
-
-                });
-              },
-              error => {
-                reject(error);
-              },
-            );
-        });
+               const attachments: string = response
+                 .map(loadedItem => `photo${loadedItem.owner_id}_${loadedItem.id}`)
+                 .join(',');
+               return resolve(attachments);
+             });
+           }, error => {
+             reject(error);
+           },
+          );
       });
-    } else {
-      return new Promise((resolve, reject) => {
-        this.post(adState, null, data => {
-          resolve(data);
-        });
-      });
-    }
+    });
   }
 
-  private post(adState: AdState, attachments: string, cb: Function) {
-    const createWallPostReq: CreateWallPostReq = {
-      message: this.vkApiService.createWallPostMessage(adState),
-      v: VK_API_VERSION,
-      attachments: attachments,
-    };
+  post(adState: AdState, attachments: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const createWallPostReq: CreateWallPostReq = {
+        message: this.vkApiService.createWallPostMessage(adState),
+        v: VK_API_VERSION,
+        attachments: attachments,
+      };
 
-    VK.Api.call('wall.post', createWallPostReq, data => {
-      cb(data);
+      VK.Api.call('wall.post', createWallPostReq, data => {
+        let {error, response} = data;
+        if (error) return reject(error);
+
+        return resolve(response);
+      });
     });
   }
 }
