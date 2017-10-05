@@ -9,6 +9,7 @@ import {CitiesReq} from '../shared/interfaces/vk.api.interfaces';
 import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
 import {CreatePostService} from './create-post.service';
 
+const MAX_ATTACHMENTS_SIZE = 52428800; // 50Mb
 export type TabKey = string;
 
 export interface Tab {
@@ -206,6 +207,15 @@ export class AdFormComponent implements OnInit, OnChanges{
 
   onFileChange(files: FileList) {
     this.files = files;
+
+    let size = Array.from(files)
+      .map(file => file.size)
+      .reduce((cur, prev) => cur + prev);
+
+    if (size >= MAX_ATTACHMENTS_SIZE) {
+      this.errorMsg = 'Суммарный размер фотографий не должен быть больше 50 Мб';
+      return;
+    }
 
     if (!files.length) {
       this.attachments = null;
