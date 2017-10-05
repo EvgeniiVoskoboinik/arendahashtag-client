@@ -10,5 +10,5 @@
 <i class="fa fa-times" aria-hidden="true"
    title="Очистить"
    *ngIf="selectedFiles.length > 0"
-   (click)="$event.stopPropagation();  this.selectedFiles = []"
+   (click)="clearFiles()"
 ></i>

@@ -61,7 +61,7 @@ export class AdFormComponent implements OnInit{
     },
   ];
   selectedTab: Tab;
-  requiredError: string;
+  errorMsg: string;
   loading: boolean = false;
 
   attachmentsLoading: boolean = false;
@@ -87,6 +87,8 @@ export class AdFormComponent implements OnInit{
     this.createPostService.loadAttachments(this.files)
       .then(attachments => {
         this.zone.run(() => {
+          if (this.errorMsg) this.errorMsg = null;
+
           this.attachments = attachments;
           this.attachmentsLoading = false;
           this.attachmentsLoaded = true;
@@ -122,7 +124,7 @@ export class AdFormComponent implements OnInit{
 
 
   onTabSelected(key: string) {
-    if (this.requiredError) this.requiredError = null;
+    if (this.errorMsg) this.errorMsg = null;
     this.selectedTab = this.tabs.find(tab => tab.key === key);
   }
 
@@ -132,12 +134,12 @@ export class AdFormComponent implements OnInit{
 
   onClickNext() {
     if (!this.isCorrectInputs()) {
-      this.requiredError = 'Не все обязательные поля заполнены';
+      this.errorMsg = 'Не все обязательные поля заполнены';
       return;
     }
 
     if (!this.attachmentsLoaded) {
-      this.requiredError = 'Вы забыли загрузить фотографии';
+      this.errorMsg = 'Вы забыли загрузить фотографии';
       return;
     }
 
@@ -161,7 +163,7 @@ export class AdFormComponent implements OnInit{
   }
 
   private changeStateValue(key: string, value: any) {
-    if (this.requiredError) this.requiredError = null;
+    if (this.errorMsg) this.errorMsg = null;
 
     let action: EditValueAction = {
       type: Actions.SetValue,
