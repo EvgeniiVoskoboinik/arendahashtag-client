@@ -41,6 +41,8 @@ $padding-m: 15px;
         position: absolute;
         top: 0;
         right: 0;
+        text-decoration: none!important;
+        font-weight: bold;
 
         &:hover{
           cursor: pointer;
