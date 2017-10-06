@@ -59,7 +59,7 @@ export class AdFormComponent implements OnInit, OnChanges{
     {
       key: 'create',
       name: 'Подать объявление',
-      buttonTitle: 'Продолжить',
+      buttonTitle: 'Опубликовать',
     },
   ];
   selectedTab: Tab;
