@@ -7,7 +7,7 @@
 
 <div *ngIf="selectedTab" class="form-container">
   <div class="form-item">
-    <h4>Населенный пункт <span class="required-asterisk" title="Обязательное поле">*</span></h4>
+    <h4>Населенный пункт <!--<span class="required-asterisk" title="Обязательное поле">*</span>--></h4>
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [searching]="true"
@@ -23,7 +23,7 @@
   <div class="form-item"></div>
 
   <div class="form-item">
-    <h4>Тип объявления <span class="required-asterisk" title="Обязательное поле">*</span></h4>
+    <h4>Тип объявления <!--<span class="required-asterisk" title="Обязательное поле">*</span>--></h4>
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="adTypes"
@@ -34,7 +34,7 @@
 
   <div class="form-item">
     <ng-container *ngIf="isRentSelected">
-      <h4>Срок аренды <span class="required-asterisk" title="Обязательное поле">*</span></h4>
+      <h4>Срок аренды <!--<span class="required-asterisk" title="Обязательное поле">*</span>--></h4>
       <app-dropdown
         [placeholder]="dropdownPlaceholder"
         [items]="leaseTerms"
@@ -45,7 +45,7 @@
   </div>
 
   <div class="form-item">
-    <h4>Вид недвижимости <span class="required-asterisk" title="Обязательное поле">*</span></h4>
+    <h4>Вид недвижимости <!--<span class="required-asterisk" title="Обязательное поле">*</span>--></h4>
     <app-dropdown
       [placeholder]="dropdownPlaceholder"
       [items]="propertyTypes"
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <div class="required-notification">* - обязательные поля</div>
+  <!--<div class="required-notification">* - обязательные поля</div>-->
 
   <div class="full-width next-button-container">
     <div class="error-container" *ngIf="errorMsg">{{errorMsg}}</div>

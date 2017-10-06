@@ -138,10 +138,10 @@ export class AdFormComponent implements OnInit, OnChanges{
   }
 
   onClickNext() {
-    if (!this.isCorrectInputs()) {
+    /*if (!this.isCorrectInputs()) {
       this.errorMsg = 'Не все обязательные поля заполнены';
       return;
-    }
+    }*/
 
     if (!this.attachmentsLoaded) {
       this.errorMsg = 'Вы забыли загрузить фотографии';
