@@ -4,4 +4,21 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
+
+  .title-container{
+    margin-bottom: 48px;
+    text-align: center;
+
+    h1, h2{
+      font-weight: normal;
+    }
+    h1{
+      font-size: 38px;
+    }
+
+    h2{
+      font-size: 28px;
+      margin-top: 0;
+    }
+  }
 }
