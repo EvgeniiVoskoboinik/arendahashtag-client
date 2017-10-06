@@ -2,14 +2,14 @@ import {AdStateItem} from './redux/interfaces';
 
 export const AD_TYPES: AdStateItem[] = [
   {
-    id: 'findRent',
-    tag: '#сниму',
-    title: 'Сниму',
-  },
-  {
     id: 'provideRent',
     tag: '#сдам',
     title: 'Сдам',
+  },
+  {
+    id: 'findRent',
+    tag: '#сниму',
+    title: 'Сниму',
   },
   {
     id: 'buy',
@@ -58,14 +58,14 @@ export const PROPERTY_TYPES: AdStateItem[] = [
 
 export const LEASE_TERMS: AdStateItem[] = [
   {
-    id: 'shortTerm',
-    tag: '#посуточно',
-    title: 'Посуточно',
-  },
-  {
     id: 'longTerm',
     tag: '#надлительныйсрок',
     title: 'На длительный срок',
+  },
+  {
+    id: 'shortTerm',
+    tag: '#посуточно',
+    title: 'Посуточно',
   },
 ];
 
