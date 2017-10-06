@@ -39,7 +39,7 @@ export class AdFormComponent implements OnInit, OnChanges{
   adState: AdState;
   dropdownPlaceholder = 'Не выбрано';
 
-  private files: FileList;
+  files: FileList;
 
   get isRentSelected(): boolean {
     return this.adState.adType &&
@@ -208,6 +208,12 @@ export class AdFormComponent implements OnInit, OnChanges{
   onFileChange(files: FileList) {
     this.files = files;
 
+    if (!files || !files.length) {
+      this.attachments = null;
+      this.attachmentsLoaded = true;
+      return;
+    }
+
     let size = Array.from(files)
       .map(file => file.size)
       .reduce((cur, prev) => cur + prev);
@@ -217,12 +223,7 @@ export class AdFormComponent implements OnInit, OnChanges{
       return;
     }
 
-    if (!files.length) {
-      this.attachments = null;
-      this.attachmentsLoaded = true;
-    } else {
-      this.attachmentsLoaded = false;
-    }
+    this.attachmentsLoaded = false;
   }
 
   ngOnInit() {

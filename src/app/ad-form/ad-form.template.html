@@ -77,23 +77,24 @@
   </div>
   <div class="form-item"></div>
 
-  <textarea autosize class="ad-description"
-    *ngIf="selectedTab.key === 'create'"
-    [ngModel]="adState.description"
-    (ngModelChange)="onSelectedChange('description', $event)"
-    placeholder="Текст объявления"
-  ></textarea>
+  <div class="full-width" *ngIf="selectedTab.key === 'create'">
+      <textarea autosize class="ad-description"
+                [ngModel]="adState.description"
+                (ngModelChange)="onSelectedChange('description', $event)"
+                placeholder="Текст объявления"
+      ></textarea>
 
-  <app-photo-upload
-    *ngIf="selectedTab.key === 'create'"
-    (fileChange)="onFileChange($event)"
-  ></app-photo-upload>
+    <app-photo-upload
+      [selectedFiles]="files"
+      (fileChange)="onFileChange($event)"
+    ></app-photo-upload>
 
-  <div class="button-container full-width" *ngIf="!attachmentsLoaded">
-    <button class="btn btn-main" (click)="loadAttachments()">
-      <span *ngIf="!attachmentsLoading">Загрузить выбранные фотографии</span>
-      <span *ngIf="attachmentsLoading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
-    </button>
+    <div class="button-container full-width" *ngIf="!attachmentsLoaded">
+      <button class="btn btn-main" (click)="loadAttachments()">
+        <span *ngIf="!attachmentsLoading">Загрузить выбранные фотографии</span>
+        <span *ngIf="attachmentsLoading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
+      </button>
+    </div>
   </div>
 
   <div class="required-notification">* - обязательные поля</div>

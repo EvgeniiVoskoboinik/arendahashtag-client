@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Output, EventEmitter, Input} from '@angular/core';
 
 @Component({
              selector: 'app-photo-upload',
@@ -7,17 +7,17 @@ import {Component, ChangeDetectionStrategy, Output, EventEmitter} from '@angular
              changeDetection: ChangeDetectionStrategy.OnPush,
            })
 export class PhotoUploadComponent{
+  @Input() selectedFiles: FileList;
   @Output() fileChange = new EventEmitter<FileList>();
 
-  selectedFiles: any = [];
   constructor() {}
 
   get inputErr(): boolean {
-    return this.selectedFiles.length > 5;
+    return this.selectedFiles && this.selectedFiles.length > 5;
   }
 
   get fileInputTitle(): string {
-    if (!this.selectedFiles.length) {
+    if (!this.selectedFiles || !this.selectedFiles.length) {
       return 'Выбрать фотографии (не более 5)';
     }
     if (this.selectedFiles.length === 1) {
@@ -39,7 +39,7 @@ export class PhotoUploadComponent{
   }
 
   clearFiles() {
-    this.selectedFiles = [];
+    this.selectedFiles = null;
     this.fileChange.emit(this.selectedFiles);
   }
 }

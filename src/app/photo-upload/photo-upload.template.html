@@ -1,6 +1,6 @@
 <input type="file" id="file" class="inputfile"
        (change)="onFileChange($event)"
-       placeholder="Upload file"
+       placeholder="Загрузить фотографии"
        accept=".jpg,.gif,.png"
        multiple>
 <label for="file" [ngClass]="{error: inputErr}">
@@ -9,6 +9,6 @@
 </label>
 <i class="fa fa-times" aria-hidden="true"
    title="Очистить"
-   *ngIf="selectedFiles.length > 0"
+   *ngIf="selectedFiles?.length > 0"
    (click)="clearFiles()"
 ></i>
