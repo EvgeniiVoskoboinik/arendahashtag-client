@@ -1,9 +1,8 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BaseComponent} from '../shared/base-component';
 import  {FeedItem} from '../shared/interfaces/feedItem';
 import  {SharedService} from '../shared/shared.service';
-
 
 @Component({
              selector: 'app-wall-post-result',
@@ -11,7 +10,7 @@ import  {SharedService} from '../shared/shared.service';
              styleUrls: ['./wall-post-result.style.scss'],
              changeDetection: ChangeDetectionStrategy.OnPush,
            })
-export class WallPostResultComponent extends BaseComponent{
+export class WallPostResultComponent extends BaseComponent implements OnInit{
   postId: number;
 
   get postLink(): string {
@@ -27,6 +26,7 @@ export class WallPostResultComponent extends BaseComponent{
   constructor(
     private route: ActivatedRoute,
     private sharedService: SharedService,
+    private router: Router,
   ) {
     super();
 
@@ -35,5 +35,11 @@ export class WallPostResultComponent extends BaseComponent{
       .subscribe(params => {
         this.postId = params.post_id;
       });
+  }
+
+  ngOnInit() {
+    if (!this.sharedService.vkUserData) {
+      this.router.navigate(['/']);
+    }
   }
 }
