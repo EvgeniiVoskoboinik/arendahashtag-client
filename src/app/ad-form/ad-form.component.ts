@@ -128,7 +128,7 @@ export class AdFormComponent implements OnInit, OnChanges{
   onTabSelected(key: string) {
     if (this.errorMsg) this.errorMsg = null;
     this.selectedTab = this.tabs.find(tab => tab.key === key);
-    this.router.navigate([`/home`], {
+    this.router.navigate([`/`], {
       queryParams: {a: this.selectedTab.key},
     });
   }

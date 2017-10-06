@@ -5,12 +5,12 @@
   ></app-post>
   </div>
 </div>
-<a [routerLink]="['/home']" [queryParams]="{a: 'search'}" class="back-button" title="Изменить запрос">
+<a [routerLink]="['/']" [queryParams]="{a: 'search'}" class="back-button" title="Изменить запрос">
   <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
 </a>
 <div class="nothing-container" *ngIf="posts && !posts.length">
   <h2>Ничего не найдено :(</h2>
-  <a [routerLink]="['/home']" [queryParams]="{a: 'search'}">Изменить параметры поиска</a>
+  <a [routerLink]="['/']" [queryParams]="{a: 'search'}">Изменить параметры поиска</a>
 </div>
 <div class="spinner" *ngIf="!posts">
   <div class="bounce1"></div>

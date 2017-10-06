@@ -5,8 +5,7 @@ import {PostListComponent} from './post-list/post-list.component';
 import {WallPostResultComponent} from './wall-post-result/wall-post-result.component';
 
 const ROUTES = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent},
   {path: 'find', component: PostListComponent},
   {path: 'post_result', component: WallPostResultComponent},
 ];
