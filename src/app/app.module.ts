@@ -20,6 +20,7 @@ import {WallPostResultComponent} from './wall-post-result/wall-post-result.compo
 import {DropdownComponent} from './shared/dropdown/dropdown.component';
 import {PhotoUploadComponent} from './photo-upload/photo-upload.component';
 import { NgxGalleryModule } from './shared/gallery/ngx-gallery.module';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgxGalleryModule } from './shared/gallery/ngx-gallery.module';
     PostListComponent,
     WallPostResultComponent,
     PhotoUploadComponent,
+    FooterComponent,
 
     DropdownComponent,
   ],
