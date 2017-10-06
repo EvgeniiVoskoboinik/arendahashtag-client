@@ -99,3 +99,45 @@ fieldset[disabled] .btn-main.active {
   border-color: #ffffff;
   color: #ffffff;
 }
+
+.btn-gold,
+.btn-gold:focus {
+  color: #ffffff;
+  background-color: #ed7a18;
+  border-color: #ffffff;
+}
+
+.btn-gold:hover,
+  //.btn-gold:active,
+  //.btn-gold.active,
+.open .dropdown-toggle.btn-gold {
+  color: #ffffff;
+  background-color: #ffa353;
+  border-color: #ffffff;
+}
+
+.btn-gold:active,
+.btn-gold.active,
+.open .dropdown-toggle.btn-gold {
+  background-image: none;
+}
+
+.btn-gold.disabled,
+.btn-gold[disabled],
+fieldset[disabled] .btn-gold,
+.btn-gold.disabled:hover,
+.btn-gold[disabled]:hover,
+fieldset[disabled] .btn-gold:hover,
+.btn-gold.disabled:focus,
+.btn-gold[disabled]:focus,
+fieldset[disabled] .btn-gold:focus,
+.btn-gold.disabled:active,
+.btn-gold[disabled]:active,
+fieldset[disabled] .btn-gold:active,
+.btn-gold.disabled.active,
+.btn-gold[disabled].active,
+fieldset[disabled] .btn-gold.active {
+  background-color: #ed7a18;
+  border-color: #ffffff;
+  color: #ffffff;
+}
