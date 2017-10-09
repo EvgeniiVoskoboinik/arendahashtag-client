@@ -14,9 +14,9 @@
     </a>
   </div>
   <div class="post-content">
-    <pre class="post-text"
+    <div class="post-text"
       [innerHTML]="post.text"
-    ></pre>
+    ></div>
   </div>
   <div class="post-attachments" *ngIf="galleryImages">
     <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>

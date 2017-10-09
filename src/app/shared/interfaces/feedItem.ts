@@ -21,7 +21,7 @@ export class FeedItem {
     this.id = dto.id;
     this.date = dto.date * 1000;
     this.ownerId = dto.owner_id;
-    this.text = dto.text;
+    this.text = dto.text.replace(/\n/g, '<br />');
     this.attachments = dto.attachments ? dto.attachments.filter(x => x.type === 'photo') : null;
     this.link = FeedItem.getWallPostLink(this.ownerId, this.id);
 
