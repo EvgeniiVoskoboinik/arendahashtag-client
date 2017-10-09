@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges, HostBinding} from '@angular/core';
 import {FeedItem} from '../shared/interfaces/feedItem';
 import {NgxGalleryImage, NgxGalleryOptions} from '../shared/gallery';
 
@@ -10,6 +10,7 @@ import {NgxGalleryImage, NgxGalleryOptions} from '../shared/gallery';
            })
 export class PostComponent implements OnChanges{
   @Input() post: FeedItem;
+  @Input() @HostBinding('class.repost-status') isRepost: boolean = false;
 
   galleryOptions: NgxGalleryOptions[] = [
     { 'image': false, 'height': '100px' },

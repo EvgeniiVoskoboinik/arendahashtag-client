@@ -21,4 +21,10 @@
   <div class="post-attachments" *ngIf="galleryImages">
     <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
   </div>
+  <div class="repost" *ngIf="post.repost">
+    <app-post
+      [post]="post.repost"
+      [isRepost]="true"
+    ></app-post>
+  </div>
 </div>

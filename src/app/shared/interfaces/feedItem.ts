@@ -14,6 +14,8 @@ export class FeedItem {
   screenName: string; //used to link to page
   ownerLink: string; // link to group/user
   ownerImageLink: string; //link to avatar
+  repost: FeedItem;
+  copy_history: FeedItemDTO[];
 
   private fillFromDto(dto: FeedItemDTO, groups: PostGroup[], profiles: PostUser[]) {
     this.id = dto.id;
@@ -53,13 +55,23 @@ export class FeedItem {
       this.ownerLink = `${VK_LINK + this.screenName}`;
       this.ownerImageLink = user.photo_50;
     }
+
+    if (dto.copy_history && dto.copy_history.length) {
+      this.copy_history = dto.copy_history;
+
+      let history = dto.copy_history.slice();
+      let historyItem = history.shift();
+      historyItem.copy_history = history;
+      this.repost = FeedItem.createFromDto(historyItem, groups, profiles);
+    }
   }
 
   private setDefault() {
-    this.displayName = 'Unknown';
-    this.screenName = `id${Math.abs(this.ownerId)}`;
+    let id = `id${Math.abs(this.ownerId)}`;
+    this.displayName = id;
+    this.screenName = id;
     this.ownerLink = `${VK_LINK + this.screenName}`;
-    this.ownerImageLink = null;
+    this.ownerImageLink = 'https://vk.com/images/camera_50.png';
   }
 
   static createFromDto(dto: FeedItemDTO, groups: PostGroup[], profiles: PostUser[]): FeedItem {

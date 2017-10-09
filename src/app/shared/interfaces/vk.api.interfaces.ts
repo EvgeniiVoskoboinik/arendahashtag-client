@@ -61,28 +61,32 @@ export interface FeedItemDTO{
   id: number;
   date: number;
   owner_id: number; //if negative - group
-  from_id: number; //if negative - group
-  post_type: string;
+  // from_id: number; //if negative - group
+  // post_type: string;
   text: string;
+  // can_edit?: 1|0;
+  // can_delete?: 1|0;
+  // created_by?: number;
   attachments?: Attachment[];
-  post_source?: {
-    type: 'string';
-  };
-  comments: {
-    count: number;
-    groups_can_post: boolean;
-    can_post: number;
-  };
-  likes: {
-    count: number;
-    user_likes: number;
-    can_like: number;
-    can_publish: number;
-  };
-  reposts: {
-    count: number;
-    user_reposted: number;
-  };
+  copy_history?: FeedItemDTO[];
+  // post_source?: {
+  //   type: 'string';
+  // };
+  // comments: {
+  //   count: number;
+  //   groups_can_post: boolean;
+  //   can_post: number;
+  // };
+  // likes: {
+  //   count: number;
+  //   user_likes: number;
+  //   can_like: number;
+  //   can_publish: number;
+  // };
+  // reposts: {
+  //   count: number;
+  //   user_reposted: number;
+  // };
 }
 
 export interface PostUser{
@@ -106,6 +110,9 @@ export interface PostGroup{
 export interface FeedSearchRes {
   response: {
     count: number;
+    /*
+    * В группе и профайле информация только о том кто разместил пост и репостнутый пост
+    * */
     groups: PostGroup[];
     profiles: PostUser[];
     next_from: string;
