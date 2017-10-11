@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
+import {VK_API_VERSION, VkApiService, GROUP_ID} from '../shared/services/vk.api.service';
 import {Http} from '@angular/http';
 import {AdState} from '../shared/redux/interfaces';
 import {BaseRes, CreateWallPostReq} from '../shared/interfaces/vk.api.interfaces';
@@ -73,9 +73,10 @@ export class CreatePostService{
     });
   }
 
-  post(adState: AdState, attachments: string): Promise<any> {
+  post(adState: AdState, attachments: string, useUserWall: boolean): Promise<any> {
     return new Promise((resolve, reject) => {
       const createWallPostReq: CreateWallPostReq = {
+        owner_id: useUserWall ? this.sharedService.vkUserData.session.mid : GROUP_ID,
         message: this.vkApiService.createWallPostMessage(adState),
         v: VK_API_VERSION,
         attachments: attachments,
@@ -85,7 +86,7 @@ export class CreatePostService{
         let {error, response} = data;
         if (error) return reject(error);
 
-        return resolve(response);
+        return resolve({...response, owner_id: createWallPostReq.owner_id});
       });
     });
   }

@@ -48,6 +48,15 @@
         min-width: 140px;
       }
     }
+    .error-container{
+      font-size: 1.3em;
+      background-color: #A66305;
+      width: 100%;
+      border-radius: 2px;
+      padding: 0 5px;
+      text-align: center;
+      margin-top: 10px;
+    }
     .next-button-container{
       display: flex;
       justify-content: flex-end;
@@ -56,14 +65,6 @@
 
       .btn-main{
         min-width: 140px;
-      }
-
-      .error-container{
-        font-size: 1.3em;
-        margin-right: 16px;
-        background-color: #A66305;
-        border-radius: 2px;
-        padding: 0 5px;
       }
     }
   }

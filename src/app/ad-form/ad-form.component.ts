@@ -103,9 +103,18 @@ export class AdFormComponent implements OnInit, OnChanges{
       });
   }
 
-  private postAd() {
+  postAd(useUserWall: boolean = false) {
+    if (!this.attachmentsLoaded) {
+      this.errorMsg = 'Вы забыли загрузить фотографии';
+      return;
+    }
+
+    if (!this.isReadyForRequest()) return;
+
     this.loading = true;
-    this.createPostService.post(this.adState, this.attachments)
+    this.changeDetectorRef.detectChanges();
+
+    this.createPostService.post(this.adState, this.attachments, useUserWall)
       .then(data => {
         this.zone.run(() => {
           this.adStateStore.dispatch({type: Actions.ResetState});
@@ -120,8 +129,19 @@ export class AdFormComponent implements OnInit, OnChanges{
       });
   }
 
-  private findAd() {
+  findAd() {
+    if (!this.isReadyForRequest()) return;
+
     this.router.navigate(['/find']);
+  }
+
+  isReadyForRequest(): boolean {
+    /*if (!this.isCorrectInputs()) {
+      this.errorMsg = 'Не все обязательные поля заполнены';
+      return false;
+    }*/
+
+    return true;
   }
 
 
@@ -135,26 +155,6 @@ export class AdFormComponent implements OnInit, OnChanges{
 
   onSelectedChange(key: string, value: any) {
     this.changeStateValue(key, value);
-  }
-
-  onClickNext() {
-    /*if (!this.isCorrectInputs()) {
-      this.errorMsg = 'Не все обязательные поля заполнены';
-      return;
-    }*/
-
-    if (!this.attachmentsLoaded) {
-      this.errorMsg = 'Вы забыли загрузить фотографии';
-      return;
-    }
-
-    this.loading = true;
-    this.changeDetectorRef.detectChanges();
-    if (this.selectedTab.key === 'create') {
-      this.postAd();
-    } else {
-      this.findAd();
-    }
   }
 
   private isCorrectInputs(): boolean {

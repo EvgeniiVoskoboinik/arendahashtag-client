@@ -166,9 +166,11 @@ export interface VkUserData{
 }
 export interface CreateWallPostReq {
   v: number;
-  owner_id?: number; //by default current user
+  owner_id?: number|string; //by default current user
   friends_only?: 1|0; //0
   message: string;
+  // from_group?: 1|0;
+  // signed?: 1|0;
 
   /* <type><owner_id>_<media_id>,<type><owner_id>_<media_id>
    *

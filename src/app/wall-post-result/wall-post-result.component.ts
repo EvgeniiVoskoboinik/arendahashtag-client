@@ -12,15 +12,12 @@ import  {SharedService} from '../shared/shared.service';
            })
 export class WallPostResultComponent extends BaseComponent implements OnInit{
   postId: number;
+  ownerId: number;
 
   get postLink(): string {
-    if (!this.sharedService.vkUserData) return null;
+    if (this.ownerId == null || this.postId == null) return null;
 
-    let ownerId = this.sharedService.vkUserData.session.mid;
-
-    if (ownerId == null || this.postId == null) return null;
-
-    return FeedItem.getWallPostLink(ownerId, this.postId);
+    return FeedItem.getWallPostLink(this.ownerId, this.postId);
   }
 
   constructor(
@@ -34,6 +31,7 @@ export class WallPostResultComponent extends BaseComponent implements OnInit{
       .takeUntil(this.destroyed$)
       .subscribe(params => {
         this.postId = params.post_id;
+        this.ownerId = params.owner_id;
       });
   }
 

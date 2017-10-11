@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AdState, AdStateItem} from '../redux/interfaces';
 
 export const VK_API_VERSION = 5.68;
+export const GROUP_ID = -151485063; // vk.com/arendahashtag
 
 @Injectable()
 export class VkApiService{

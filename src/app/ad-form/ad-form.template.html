@@ -102,13 +102,30 @@
   <!--<div class="required-notification">* - обязательные поля</div>-->
 
   <div class="full-width next-button-container">
-    <div class="error-container" *ngIf="errorMsg">{{errorMsg}}</div>
-    <button class="btn btn-main"
-            (click)="onClickNext()"
+    <button class="btn btn-main" *ngIf="selectedTab.key === 'search'"
+            (click)="findAd()"
             [disabled]="loading"
     >
-      <span *ngIf="!loading">{{selectedTab.buttonTitle}}</span>
+      <span *ngIf="!loading">Найти</span>
       <span *ngIf="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
     </button>
+
+    <div class="post-buttons-container" *ngIf="selectedTab.key === 'create'">
+      <button class="btn btn-main"
+              (click)="postAd(true)"
+              [disabled]="loading"
+      >
+        <span *ngIf="!loading">Опубликовать на своей стене</span>
+        <span *ngIf="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
+      </button>
+      <button class="btn btn-main"
+              (click)="postAd(false)"
+              [disabled]="loading"
+      >
+        <span *ngIf="!loading">Опубликовать в группе Аренда#</span>
+        <span *ngIf="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
+      </button>
+    </div>
   </div>
+  <div class="error-container" *ngIf="errorMsg">{{errorMsg}}</div>
 </div>
