@@ -1,5 +1,9 @@
+interface ResError {
+  error_code: number;
+  error_msg: string;
+}
 export interface BaseRes<T> {
-  error: any;
+  error: ResError;
   response: T;
 }
 export interface DbReq{
@@ -61,7 +65,7 @@ export interface FeedItemDTO{
   id: number;
   date: number;
   owner_id: number; //if negative - group
-  // from_id: number; //if negative - group
+  from_id: number; //if negative - group
   // post_type: string;
   text: string;
   // can_edit?: 1|0;
@@ -107,18 +111,18 @@ export interface PostGroup{
   type: string;
 }
 
-export interface FeedSearchRes {
-  response: {
-    count: number;
-    /*
-    * В группе и профайле информация только о том кто разместил пост и репостнутый пост
-    * */
-    groups: PostGroup[];
-    profiles: PostUser[];
-    next_from: string;
-    total_count: number;
-    items: FeedItemDTO[];
-  };
+export interface SearchRes {
+  count: number;
+  groups: PostGroup[];
+  profiles: PostUser[];
+  items: FeedItemDTO[];
+}
+export interface FeedSearchRes extends SearchRes {
+  /*
+  * В группе и профайле информация только о том кто разместил пост и репостнутый пост
+  * */
+  next_from: string;
+  total_count: number;
 }
 export interface FeedSearchReq {
   q: string;
@@ -128,7 +132,20 @@ export interface FeedSearchReq {
   end_time?: number; //not by default
   start_from?: number;
   fields?: string;
-  v?: number;
+  v: number;
+}
+export interface WallSearchReq {
+  owner_id: number;
+  query: string;
+  extended?: 1|0; // 0 by default
+  count?: number; //20. Max: 100
+
+  offset?: number; //0
+  fields?: string;
+  v: number;
+}
+export interface WallSearchRes extends SearchRes{
+
 }
 
 export interface VkSession {
