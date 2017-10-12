@@ -5,6 +5,7 @@ const VK_LINK = 'https://vk.com/';
 export class FeedItem {
   id: number;
   date: number; // in ms
+  fromId: number;
   ownerId: number; // if negative - group
   text: string; //html
   attachments: Attachment[]; //only photos
@@ -20,13 +21,14 @@ export class FeedItem {
   private fillFromDto(dto: FeedItemDTO, groups: PostGroup[], profiles: PostUser[]) {
     this.id = dto.id;
     this.date = dto.date * 1000;
+    this.fromId = dto.from_id;
     this.ownerId = dto.owner_id;
     this.text = dto.text.replace(/\n/g, '<br />');
     this.attachments = dto.attachments ? dto.attachments.filter(x => x.type === 'photo') : null;
     this.link = FeedItem.getWallPostLink(this.ownerId, this.id);
 
-    if (this.ownerId < 0) {
-      let group = groups.find(x => x.id === Math.abs(this.ownerId));
+    if (this.fromId < 0) {
+      let group = groups.find(x => x.id === Math.abs(this.fromId));
       if (!group) {
         this.setDefault();
         return;
@@ -37,7 +39,7 @@ export class FeedItem {
       this.ownerLink = `${VK_LINK + this.screenName}`;
       this.ownerImageLink = group.photo_50;
     } else {
-      let user = profiles.find(x => x.id === this.ownerId);
+      let user = profiles.find(x => x.id === this.fromId);
       if (!user) {
         this.setDefault();
         return;
@@ -67,7 +69,7 @@ export class FeedItem {
   }
 
   private setDefault() {
-    let id = `id${Math.abs(this.ownerId)}`;
+    let id = `id${Math.abs(this.fromId)}`;
     this.displayName = id;
     this.screenName = id;
     this.ownerLink = `${VK_LINK + this.screenName}`;
