@@ -34,8 +34,8 @@ export class PostComponent implements OnChanges{
 
             let photoSizes = Object.keys(photo)
               .filter(key => key.includes('photo'))
-              .map(key => key.split('_').pop())
-              .sort();
+              .map(key => Number(key.split('_').pop()))
+              .sort((a, b) => a - b);
 
             return {
               small: photo[`photo_${photoSizes[0]}`],
