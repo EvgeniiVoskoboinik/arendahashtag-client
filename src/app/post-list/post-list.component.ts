@@ -1,13 +1,14 @@
 import {Component, ChangeDetectionStrategy, ChangeDetectorRef, NgZone} from '@angular/core';
 import {
-  BaseRes, FeedSearchReq, FeedSearchRes, SearchRes, WallSearchReq,
-  WallSearchRes,
+  BaseRes, FeedSearchReq, SearchRes, WallGetReq, WallSearchReq,
 } from '../shared/interfaces/vk.api.interfaces';
 import {GROUP_ID, VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
 import {AdStateStore, AdState} from '../shared/redux';
 import {FeedItem} from '../shared/interfaces/feedItem';
 import {BaseComponent} from '../shared/base-component';
 import {Router} from '@angular/router';
+import {GROUPS_MAP} from '../shared/services/groups-map';
+import {Observable} from 'rxjs';
 
 @Component({
              selector: 'app-post-list',
@@ -41,6 +42,20 @@ export class PostListComponent extends BaseComponent{
   }
 
   private loadPosts() {
+    Observable.zip(
+      Observable.fromPromise(this.getNewsFeeds()),
+      Observable.fromPromise(this.getPostsFromGroup()),
+      Observable.fromPromise(this.getPostsFromGroups()),
+    )
+    .subscribe((arr: [SearchRes, SearchRes, SearchRes]) => {
+      arr.forEach(x => this.mergePosts(x));
+      this.changeDetectorRef.detectChanges();
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  private getNewsFeeds(): Promise<SearchRes> {
     let feedSearchParams: FeedSearchReq = {
       q: this.vkApiService.createSearchQuery(this.adState),
       extended: 1,
@@ -48,6 +63,20 @@ export class PostListComponent extends BaseComponent{
       count: 200,
     };
 
+    return new Promise((resolve, reject) => {
+      VK.Api.call('newsfeed.search', feedSearchParams, (data: BaseRes<SearchRes>) => {
+        this.zone.run(() => {
+          let {error, response} = data;
+          if (error) {
+            console.error(error.error_msg);
+            return resolve();
+          }
+          resolve(response);
+        });
+      });
+    });
+  }
+  private getPostsFromGroup(): Promise<SearchRes> {
     let wallSearchParams: WallSearchReq = {
       owner_id: GROUP_ID,
       query: this.vkApiService.createSearchQuery(this.adState),
@@ -56,37 +85,53 @@ export class PostListComponent extends BaseComponent{
       count: 100,
     };
 
-    VK.Api.call('wall.search', wallSearchParams, (data: BaseRes<WallSearchRes>) => {
-      this.zone.run(() => {
-        let {error, response} = data;
-
-        if (error) {
-          console.error(error.error_msg);
-          // need stop loader and show notification
-          return;
-        }
-
-        this.mergePosts(response);
+    return new Promise((resolve, reject) => {
+      VK.Api.call('wall.search', wallSearchParams, (data: BaseRes<SearchRes>) => {
+        this.zone.run(() => {
+          let {error, response} = data;
+          if (error) {
+            console.error(error.error_msg);
+            return resolve();
+          }
+          resolve(response);
+        });
       });
     });
+  }
+  private getPostsFromGroups(): Promise<SearchRes> {
+    return new Promise((resolve, reject) => {
+      let {propertyType, adType, city} = this.adState;
+      if (propertyType || adType || !city) return resolve();
 
-    VK.Api.call('newsfeed.search', feedSearchParams, (data: BaseRes<FeedSearchRes>) => {
-      this.zone.run(() => {
+      let groupsMapKey = city.length ? city[0].tag.slice(1).toLowerCase() : null;
+      if (!groupsMapKey) return resolve();
 
-        let {error, response} = data;
+      let groupId = GROUPS_MAP[groupsMapKey];
+      if (!groupId) return resolve();
 
-        if (error) {
-          console.error(error.error_msg);
-          // need stop loader and show notification
-          return;
-        }
+      let wallSearchParams: WallGetReq = {
+        owner_id: groupId,
+        extended: 1,
+        v: VK_API_VERSION,
+        count: 100,
+      };
 
-        this.mergePosts(response);
+      VK.Api.call('wall.get', wallSearchParams, (data: BaseRes<SearchRes>) => {
+        this.zone.run(() => {
+          let {error, response} = data;
+          if (error) {
+            console.error(error.error_msg);
+            return resolve();
+          }
+          resolve(response);
+        });
       });
     });
   }
 
   private mergePosts(data: SearchRes) {
+    if (!data) return;
+
     if (!this.posts) {
       this.posts = data.items.map(x => FeedItem.createFromDto(x, data.groups, data.profiles));
     } else {

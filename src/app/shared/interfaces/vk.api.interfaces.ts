@@ -147,6 +147,15 @@ export interface WallSearchReq {
 export interface WallSearchRes extends SearchRes{
 
 }
+export interface WallGetReq {
+  owner_id: number;
+  extended?: 1|0; // 0 by default
+  count?: number; //20. Max: 100
+  offset?: number; //0
+  fields?: string;
+  filter?: string; //all by default
+  v: number;
+}
 
 export interface VkSession {
   expire: number;
