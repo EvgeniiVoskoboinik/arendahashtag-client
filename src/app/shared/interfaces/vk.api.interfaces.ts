@@ -71,6 +71,7 @@ export interface FeedItemDTO{
   // can_edit?: 1|0;
   // can_delete?: 1|0;
   // created_by?: number;
+  signer_id?: number;
   attachments?: Attachment[];
   copy_history?: FeedItemDTO[];
   // post_source?: {

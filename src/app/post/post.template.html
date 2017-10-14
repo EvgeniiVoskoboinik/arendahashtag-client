@@ -27,4 +27,7 @@
       [isRepost]="true"
     ></app-post>
   </div>
+  <div class="signer-container" *ngIf="post.signer">
+    <a target="_blank" href="{{post.signer.link}}">{{post.signer.title}}</a>
+  </div>
 </div>

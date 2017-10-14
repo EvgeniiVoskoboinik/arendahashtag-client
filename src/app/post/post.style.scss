@@ -76,8 +76,9 @@ $padding-m: 15px;
       }
     }
 
-    .post-attachments{
-
+    .post-attachments,
+    .signer-container{
+      padding: 0 5px;
     }
   }
 }

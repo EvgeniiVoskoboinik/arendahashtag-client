@@ -2,6 +2,11 @@ import {FeedItemDTO, Attachment, PostGroup, PostUser} from './vk.api.interfaces'
 
 const VK_LINK = 'https://vk.com/';
 
+interface Signer {
+  link: string;
+  title: string;
+}
+
 export class FeedItem {
   id: number;
   date: number; // in ms
@@ -17,6 +22,9 @@ export class FeedItem {
   ownerImageLink: string; //link to avatar
   repost: FeedItem;
   copy_history: FeedItemDTO[];
+  signer: Signer;
+
+  /* tslint:disable:cyclomatic-complexity */
 
   private fillFromDto(dto: FeedItemDTO, groups: PostGroup[], profiles: PostUser[]) {
     this.id = dto.id;
@@ -36,7 +44,7 @@ export class FeedItem {
 
       this.displayName = group.name;
       this.screenName = group.screen_name;
-      this.ownerLink = `${VK_LINK + this.screenName}`;
+      this.ownerLink = FeedItem.profileLink(group.screen_name);
       this.ownerImageLink = group.photo_50;
     } else {
       let user = profiles.find(x => x.id === this.fromId);
@@ -44,17 +52,10 @@ export class FeedItem {
         this.setDefault();
         return;
       }
-      let name = '';
-      if (user.first_name) {
-        name += user.first_name;
-      }
-      if (user.last_name) {
-        name += ` ${user.last_name}`;
-      }
 
-      this.displayName = name.trim();
+      this.displayName = FeedItem.createDisplayName(user);
       this.screenName = user.screen_name;
-      this.ownerLink = `${VK_LINK + this.screenName}`;
+      this.ownerLink = FeedItem.profileLink(user.screen_name);
       this.ownerImageLink = user.photo_50;
     }
 
@@ -66,14 +67,36 @@ export class FeedItem {
       historyItem.copy_history = history;
       this.repost = FeedItem.createFromDto(historyItem, groups, profiles);
     }
+
+    if (dto.signer_id) {
+      let signerProfile = profiles.find(x => x.id === dto.signer_id);
+      let id = `id${dto.signer_id}`;
+
+      let address = signerProfile ? signerProfile.screen_name : id;
+      this.signer = {
+        link: FeedItem.profileLink(address),
+        title: signerProfile ? FeedItem.createDisplayName(signerProfile) : id,
+      };
+    }
   }
 
   private setDefault() {
     let id = `id${Math.abs(this.fromId)}`;
     this.displayName = id;
     this.screenName = id;
-    this.ownerLink = `${VK_LINK + this.screenName}`;
+    this.ownerLink = FeedItem.profileLink(this.screenName);
     this.ownerImageLink = 'https://vk.com/images/camera_50.png';
+  }
+
+  static createDisplayName(user: PostUser): string {
+    let name = '';
+    if (user.first_name) {
+      name += user.first_name;
+    }
+    if (user.last_name) {
+      name += ` ${user.last_name}`;
+    }
+    return name.trim();
   }
 
   static createFromDto(dto: FeedItemDTO, groups: PostGroup[], profiles: PostUser[]): FeedItem {
@@ -84,5 +107,8 @@ export class FeedItem {
 
   static getWallPostLink(ownerId: string|number, postId: string|number): string {
     return `${VK_LINK}wall${ownerId}_${postId}`;
+  }
+  static profileLink(address: string | number): string {
+    return `${VK_LINK + address}`;
   }
 }
