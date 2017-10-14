@@ -104,7 +104,7 @@ export class NgxGalleryOptions implements INgxGalleryOptions {
         }
 
         this.breakpoint = use(obj.breakpoint, undefined);
-        this.width = use(obj.width, '500px');
+        this.width = use(obj.width, '700px');
         this.height = use(obj.height, '400px');
         this.fullWidth = use(obj.fullWidth, false);
         this.layout = use(obj.layout, NgxGalleryLayout.ThumbnailsBottom);
@@ -119,11 +119,11 @@ export class NgxGalleryOptions implements INgxGalleryOptions {
         this.imageSize = use(obj.imageSize, NgxGalleryImageSize.Cover);
         this.imageAutoPlay = use(obj.imageAutoPlay, false);
         this.imageAutoPlayInterval = use(obj.imageAutoPlayInterval, 2000);
-        this.imageAutoPlayPauseOnHover= use(obj.imageAutoPlayPauseOnHover, false);
+        this.imageAutoPlayPauseOnHover = use(obj.imageAutoPlayPauseOnHover, false);
         this.imageInfinityMove = use(obj.imageInfinityMove, false);
 
         this.thumbnails = use(obj.thumbnails, true);
-        this.thumbnailsColumns = use(obj.thumbnailsColumns, 4);
+        this.thumbnailsColumns = use(obj.thumbnailsColumns, 7);
         this.thumbnailsRows = use(obj.thumbnailsRows, 1);
         this.thumbnailsPercent = use(obj.thumbnailsPercent, 25);
         this.thumbnailsMargin = use(obj.thumbnailsMargin, 10);
