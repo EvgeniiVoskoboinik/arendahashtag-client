@@ -21,6 +21,7 @@ import {DropdownComponent} from './shared/dropdown/dropdown.component';
 import {PhotoUploadComponent} from './photo-upload/photo-upload.component';
 import { NgxGalleryModule } from './shared/gallery/ngx-gallery.module';
 import {FooterComponent} from './footer/footer.component';
+import {AdFormService} from './ad-form/ad-form.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import {FooterComponent} from './footer/footer.component';
     routing,
     SharedModule,
   ],
-  providers: [],
+  providers: [AdFormService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

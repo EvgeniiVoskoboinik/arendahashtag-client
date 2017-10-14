@@ -291,7 +291,15 @@ export class DropdownComponent implements OnInit, OnDestroy{
     }
   }
   private getTitle = (id: DropdownId): string => {
-    return this.titlesMap[id] || String(id);
+    if (this.titlesMap[id]) {
+      return this.titlesMap[id];
+    }
+
+    let selectedItemById = this.selectedItems.find(x => x.id === id);
+    if (selectedItemById) {
+      return selectedItemById.title;
+    }
+    return String(id);
   };
 
 

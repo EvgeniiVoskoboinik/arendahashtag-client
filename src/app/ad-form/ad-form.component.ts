@@ -5,9 +5,7 @@ import {AD_FORM_ANIMATIONS} from './ad-form.animation';
 import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT} from '../shared/ad-state-items';
 import {Router} from '@angular/router';
 import {AdStateStore, EditValueAction, Actions, AdState} from '../shared/redux';
-import {CitiesReq} from '../shared/interfaces/vk.api.interfaces';
-import {VK_API_VERSION, VkApiService} from '../shared/services/vk.api.service';
-import {CreatePostService} from './create-post.service';
+import {AdFormService} from './ad-form.service';
 
 const MAX_ATTACHMENTS_SIZE = 52428800; // 50Mb
 export type TabKey = string;
@@ -15,7 +13,6 @@ export type TabKey = string;
 export interface Tab {
   name: string;
   key: TabKey;
-  buttonTitle: string;
 }
 
 @Component({
@@ -24,7 +21,6 @@ export interface Tab {
   styleUrls: ['./ad-form.style.scss'],
   animations: AD_FORM_ANIMATIONS,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CreatePostService],
 })
 export class AdFormComponent implements OnInit, OnChanges{
   @Input() tab: string;
@@ -54,12 +50,10 @@ export class AdFormComponent implements OnInit, OnChanges{
     {
       key: 'search',
       name: 'Найти объявление',
-      buttonTitle: 'Найти',
     },
     {
       key: 'create',
       name: 'Подать объявление',
-      buttonTitle: 'Опубликовать',
     },
   ];
   selectedTab: Tab;
@@ -76,7 +70,7 @@ export class AdFormComponent implements OnInit, OnChanges{
     private adStateStore: AdStateStore,
     private changeDetectorRef: ChangeDetectorRef,
     private zone: NgZone,
-    private createPostService: CreatePostService,
+    private adFormService: AdFormService,
   ) {
     this.adStateStore.state$
       .subscribe(state => {
@@ -86,7 +80,7 @@ export class AdFormComponent implements OnInit, OnChanges{
 
   loadAttachments() {
     this.attachmentsLoading = true;
-    this.createPostService.loadAttachments(this.files)
+    this.adFormService.loadAttachments(this.files)
       .then(attachments => {
         this.zone.run(() => {
           if (this.errorMsg) this.errorMsg = null;
@@ -114,7 +108,7 @@ export class AdFormComponent implements OnInit, OnChanges{
     this.loading = true;
     this.changeDetectorRef.detectChanges();
 
-    this.createPostService.post(this.adState, this.attachments, useUserWall)
+    this.adFormService.post(this.adState, this.attachments, useUserWall)
       .then(data => {
         this.zone.run(() => {
           this.adStateStore.dispatch({type: Actions.ResetState});
@@ -179,29 +173,13 @@ export class AdFormComponent implements OnInit, OnChanges{
   }
 
   onCitySearchChange(str?: string) {
-    let params: CitiesReq = {
-      country_id: 1,
-      v: VK_API_VERSION,
-      count: 50,
-    };
-    if (str) {
-      params.q = str;
-    }
-
-    VK.Api.call('database.getCities', params, data => {
-      this.cities = data.response.items.map(x => {
-        let description = '';
-        if (x.area) description = `${x.area}, `;
-        if (x.region) description += x.region;
-
-        return {
-          id: x.id,
-          title: x.title,
-          tag: VkApiService.createCityHashtag(x),
-          description: description.trim(),
-        };
+    this.adFormService.getCities(str).then((cities: any) => {
+      this.zone.run(() => {
+        this.cities = cities;
+        this.changeDetectorRef.detectChanges();
       });
-      this.changeDetectorRef.detectChanges();
+    }, error => {
+      console.error(error.error_msg);
     });
   }
 
@@ -227,7 +205,7 @@ export class AdFormComponent implements OnInit, OnChanges{
   }
 
   ngOnInit() {
-    this.onCitySearchChange();
+    this.onCitySearchChange(null);
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {VK_API_VERSION, VkApiService, GROUP_ID} from '../shared/services/vk.api.service';
 import {Http} from '@angular/http';
 import {AdState} from '../shared/redux/interfaces';
-import {BaseRes, CreateWallPostReq} from '../shared/interfaces/vk.api.interfaces';
+import {BaseRes, CitiesReq, CreateWallPostReq} from '../shared/interfaces/vk.api.interfaces';
 import {SharedService} from '../shared/shared.service';
 
 interface GetWallUploadServerReq {
@@ -30,12 +30,14 @@ interface SaveWallPhotoItem{
 }
 
 @Injectable()
-export class CreatePostService{
+export class AdFormService{
   constructor(
     private vkApiService: VkApiService,
     private http: Http,
     private sharedService: SharedService,
   ) {}
+
+  private loadedCities: any[];
 
   loadAttachments(files: FileList): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -87,6 +89,45 @@ export class CreatePostService{
         if (error) return reject(error);
 
         return resolve({...response, owner_id: createWallPostReq.owner_id});
+      });
+    });
+  }
+
+  getCities(str?: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+      if (str === null) {
+        if (this.loadedCities) return resolve(this.loadedCities);
+      }
+
+      let params: CitiesReq = {
+        country_id: 1,
+        v: VK_API_VERSION,
+        count: 50,
+      };
+      if (str) {
+        params.q = str;
+      }
+
+      VK.Api.call('database.getCities', params, data => {
+        let {error, response} = data;
+
+        if (error) return reject(error);
+
+        this.loadedCities = response.items.map(x => {
+          let description = '';
+          if (x.area) description = `${x.area}, `;
+          if (x.region) description += x.region;
+
+          return {
+            id: x.id,
+            title: x.title,
+            tag: VkApiService.createCityHashtag(x),
+            description: description.trim(),
+          };
+        });
+
+        resolve(this.loadedCities);
       });
     });
   }
