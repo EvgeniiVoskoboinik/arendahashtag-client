@@ -17,7 +17,7 @@ export class VkApiService{
 
     return `${adState.description}
 
-${tags}`;
+#arendahashtag ${tags}`;
   }
 
   private createHashtagString(adState: AdState): string {
@@ -29,7 +29,7 @@ ${tags}`;
       .map(x => x.tag)
       .join(' ');
 
-    return `#arendahashtag ${tags}`;
+    return `${tags}`;
   }
 
   static createCityHashtag(city: AdStateItem): string {
