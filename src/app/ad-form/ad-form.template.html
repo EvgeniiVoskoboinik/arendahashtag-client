@@ -111,18 +111,17 @@
     </button>
 
     <div class="post-buttons-container" *ngIf="selectedTab.key === 'create'">
+      <app-checkbox
+                    [checked]="adState.useUserWall"
+                    [labelRight]="true"
+                    (onChange)="onSelectedChange('useUserWall', $event)"
+      >Разместить запись на своей стене</app-checkbox>
+
       <button class="btn btn-main"
-              (click)="postAd(true)"
+              (click)="postAd()"
               [disabled]="loading"
       >
-        <span *ngIf="!loading">Опубликовать на своей стене</span>
-        <span *ngIf="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
-      </button>
-      <button class="btn btn-main"
-              (click)="postAd(false)"
-              [disabled]="loading"
-      >
-        <span *ngIf="!loading">Опубликовать в группе Аренда#</span>
+        <span *ngIf="!loading">Опубликовать</span>
         <span *ngIf="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
       </button>
     </div>

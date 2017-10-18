@@ -66,6 +66,15 @@
       .btn-main{
         min-width: 140px;
       }
+
+      .post-buttons-container{
+        display: flex;
+        flex-direction: column;
+
+        app-checkbox {
+          margin-bottom: 8px;
+        }
+      }
     }
   }
 }

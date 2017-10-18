@@ -10,6 +10,7 @@ export const INITIAL_STATE: AdState = {
   roomsCount: [ROOMS_COUNT[0]],
   advertiser: [ADVERTISER_TYPES[0]],
   description: '',
+  useUserWall: false,
 };
 
 export enum Actions{

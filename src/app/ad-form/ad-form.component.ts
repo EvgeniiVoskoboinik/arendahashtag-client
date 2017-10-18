@@ -97,18 +97,16 @@ export class AdFormComponent implements OnInit, OnChanges{
       });
   }
 
-  postAd(useUserWall: boolean = false) {
+  postAd() {
     if (!this.attachmentsLoaded) {
       this.errorMsg = 'Вы забыли загрузить фотографии';
       return;
     }
 
-    if (!this.isReadyForRequest()) return;
-
     this.loading = true;
     this.changeDetectorRef.detectChanges();
 
-    this.adFormService.post(this.adState, this.attachments, useUserWall)
+    this.adFormService.post(this.adState, this.attachments)
       .then(data => {
         this.zone.run(() => {
           this.adStateStore.dispatch({type: Actions.ResetState});
@@ -124,20 +122,8 @@ export class AdFormComponent implements OnInit, OnChanges{
   }
 
   findAd() {
-    if (!this.isReadyForRequest()) return;
-
     this.router.navigate(['/find']);
   }
-
-  isReadyForRequest(): boolean {
-    /*if (!this.isCorrectInputs()) {
-      this.errorMsg = 'Не все обязательные поля заполнены';
-      return false;
-    }*/
-
-    return true;
-  }
-
 
   onTabSelected(key: string) {
     if (this.errorMsg) this.errorMsg = null;
@@ -149,16 +135,6 @@ export class AdFormComponent implements OnInit, OnChanges{
 
   onSelectedChange(key: string, value: any) {
     this.changeStateValue(key, value);
-  }
-
-  private isCorrectInputs(): boolean {
-    if (this.isRentSelected && !this.adState.leaseTerm) return false;
-
-    return Boolean(
-      this.adState.city
-      && this.adState.adType
-      && this.adState.propertyType
-    );
   }
 
   private changeStateValue(key: string, value: any) {

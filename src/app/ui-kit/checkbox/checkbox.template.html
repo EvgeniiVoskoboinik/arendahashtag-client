@@ -1,4 +1,4 @@
-<label class="beh-checkbox-container" [ngClass]="{labelPresent: label.childNodes.length, labelRight: labelRight, disabled: disabled}">
+<label class="app-checkbox-container" [ngClass]="{labelPresent: label.childNodes.length, labelRight: labelRight, disabled: disabled}">
     <span #label><ng-content></ng-content></span>
     <input type="checkbox"
            [checked]="checked"
@@ -6,5 +6,5 @@
            [disabled]="disabled"
            (change)="onChangeState()"
     />
-        <div class="beh-checkbox"><i class="behicon-check"></i></div>
+        <div class="app-checkbox"></div>
 </label>

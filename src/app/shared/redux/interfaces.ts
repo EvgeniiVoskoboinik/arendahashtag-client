@@ -11,6 +11,7 @@ export interface AdState{
   roomsCount: AdStateItem[];
   advertiser: AdStateItem[];
   description: string;
+  useUserWall: boolean;
 }
 export interface AdAction{
   type: string | number;

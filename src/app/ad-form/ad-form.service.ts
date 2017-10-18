@@ -75,10 +75,10 @@ export class AdFormService{
     });
   }
 
-  post(adState: AdState, attachments: string, useUserWall: boolean): Promise<any> {
+  post(adState: AdState, attachments: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const createWallPostReq: CreateWallPostReq = {
-        owner_id: useUserWall ? this.sharedService.vkUserData.session.mid : GROUP_ID,
+        owner_id: adState.useUserWall ? this.sharedService.vkUserData.session.mid : GROUP_ID,
         message: this.vkApiService.createWallPostMessage(adState),
         v: VK_API_VERSION,
         attachments: attachments,
