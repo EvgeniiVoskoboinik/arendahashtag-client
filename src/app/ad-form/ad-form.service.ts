@@ -4,6 +4,7 @@ import {Http} from '@angular/http';
 import {AdState} from '../shared/redux/interfaces';
 import {BaseRes, CitiesReq, CreateWallPostReq} from '../shared/interfaces/vk.api.interfaces';
 import {SharedService} from '../shared/shared.service';
+import {FileObj} from '../photo-upload/photo-upload.component';
 
 interface GetWallUploadServerReq {
  v: number;
@@ -39,7 +40,7 @@ export class AdFormService{
 
   private loadedCities: any[];
 
-  loadAttachments(files: FileList): Promise<any> {
+  loadAttachments(files: FileObj[]): Promise<any> {
     return new Promise((resolve, reject) => {
       if (!files || !files.length) return resolve(null);
 
@@ -48,7 +49,7 @@ export class AdFormService{
       VK.Api.call('photos.getWallUploadServer', params, (uploadServer: BaseRes<GetWallUploadServerRes>) => {
         let formData: FormData = new FormData();
         for (let i = 0; i < files.length; i++) {
-          formData.append(`file${i + 1}`, files[i], files[i].name);
+          formData.append(`file${i + 1}`, files[i].file, files[i].file.name);
         }
         this.http.post('/api/uploadPhotos?server=' + encodeURIComponent(uploadServer.response.upload_url), formData)
           .map(x => x.json())

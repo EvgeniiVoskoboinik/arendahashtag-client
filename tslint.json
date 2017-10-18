@@ -6,7 +6,7 @@
     "adjacent-overload-signatures": true,
     "prefer-for-of": true,
     "only-arrow-functions": [
-      true,
+      false,
       "allow-declarations",
       "allow-named-functions"
     ],

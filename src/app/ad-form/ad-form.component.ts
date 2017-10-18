@@ -6,6 +6,7 @@ import {AD_TYPES, ADVERTISER_TYPES, LEASE_TERMS, PROPERTY_TYPES, ROOMS_COUNT} fr
 import {Router} from '@angular/router';
 import {AdStateStore, EditValueAction, Actions, AdState} from '../shared/redux';
 import {AdFormService} from './ad-form.service';
+import {FileObj} from '../photo-upload/photo-upload.component';
 
 const MAX_ATTACHMENTS_SIZE = 52428800; // 50Mb
 export type TabKey = string;
@@ -35,7 +36,7 @@ export class AdFormComponent implements OnInit, OnChanges{
   adState: AdState;
   dropdownPlaceholder = 'Не выбрано';
 
-  files: FileList;
+  files: FileObj[];
 
   get isRentSelected(): boolean {
     return this.adState.adType &&
@@ -159,7 +160,7 @@ export class AdFormComponent implements OnInit, OnChanges{
     });
   }
 
-  onFileChange(files: FileList) {
+  onFileChange(files: FileObj[]) {
     this.files = files;
 
     if (!files || !files.length) {
@@ -169,7 +170,7 @@ export class AdFormComponent implements OnInit, OnChanges{
     }
 
     let size = Array.from(files)
-      .map(file => file.size)
+      .map(file => file.file.size)
       .reduce((cur, prev) => cur + prev);
 
     if (size >= MAX_ATTACHMENTS_SIZE) {

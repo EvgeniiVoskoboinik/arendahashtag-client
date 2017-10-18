@@ -7,8 +7,13 @@
   <i class="fa fa-upload" aria-hidden="true"></i>
   <span>{{fileInputTitle}}</span>
 </label>
-<i class="fa fa-times" aria-hidden="true"
-   title="Очистить"
-   *ngIf="selectedFiles?.length > 0"
-   (click)="clearFiles()"
-></i>
+
+<div class="images-container">
+  <div class="image-container" *ngFor="let file of selectedFiles; let i = index">
+    <img [src]="file.data"
+         [ngStyle]="{'width.px': getWidth(file), 'height.px': HEIGHT}">
+    <span class="icon-close small thick" title="Удалить"
+       (click)="deleteFile(i)"
+    ></span>
+  </div>
+</div>

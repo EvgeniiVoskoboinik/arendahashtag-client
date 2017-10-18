@@ -1,6 +1,4 @@
 :host{
-  display: flex;
-  justify-content: flex-end;
   width: 100%;
   position: relative;
 
@@ -56,4 +54,30 @@
       cursor: pointer;
     }
   }
+
+  .images-container {
+    margin-top: 8px;
+
+    .image-container{
+      position: relative;
+      display: inline-block;
+      box-sizing: content-box;
+
+      span.icon-close{
+        position: absolute;
+        background: rgba(0,0,0,0.1);
+        top: -13px;
+        right: -13px;
+
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+
+    .image-container + .image-container {
+      padding-left: 8px;
+    }
+  }
+
 }
