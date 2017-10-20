@@ -10,7 +10,7 @@ export class VkApiService{
   constructor() {}
 
   createSearchQuery(adState: AdState): string {
-    return this.createHashtagString(adState);
+    return this.createHashtagString(adState) || '#arendahashtag';
   }
   createWallPostMessage(adState: AdState): string {
     let tags = this.createHashtagString(adState);
