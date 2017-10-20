@@ -1,5 +1,5 @@
 <input type="file" id="file" class="inputfile"
-       (change)="onFileChange($event)"
+       (change)="onFilesChange($event)"
        placeholder="Загрузить фотографии"
        accept=".jpg,.gif,.png"
        multiple>
@@ -10,10 +10,15 @@
 
 <div class="images-container">
   <div class="image-container" *ngFor="let file of selectedFiles; let i = index">
-    <img [src]="file.data"
+    <img [src]="file.data" *ngIf="file.data" [ngClass]="{uploaded: file.attachment}"
          [ngStyle]="{'width.px': getWidth(file), 'height.px': HEIGHT}">
-    <span class="icon-close small thick" title="Удалить"
+    <span class="icon-close small thick" *ngIf="!file.loading" title="Удалить"
        (click)="deleteFile(i)"
     ></span>
+    <div class="spinner" *ngIf="file.loading">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
   </div>
 </div>

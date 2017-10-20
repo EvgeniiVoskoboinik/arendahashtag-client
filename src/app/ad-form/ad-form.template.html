@@ -86,17 +86,9 @@
 
     <app-photo-upload
       [selectedFiles]="files"
-      (fileChange)="onFileChange($event)"
-    ></app-photo-upload>
 
-    <div class="button-container full-width" *ngIf="!attachmentsLoaded">
-      <button class="btn btn-gold"
-              [disabled]="attachmentsLoading"
-              (click)="loadAttachments()">
-        <span *ngIf="!attachmentsLoading">Загрузить выбранные фотографии</span>
-        <span *ngIf="attachmentsLoading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
-      </button>
-    </div>
+      (selectedFilesChange)="onFilesChange($event)"
+    ></app-photo-upload>
   </div>
 
   <!--<div class="required-notification">* - обязательные поля</div>-->

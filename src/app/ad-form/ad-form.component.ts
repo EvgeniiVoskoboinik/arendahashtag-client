@@ -61,11 +61,6 @@ export class AdFormComponent implements OnInit, OnChanges{
   errorMsg: string;
   loading: boolean = false;
 
-  attachmentsLoading: boolean = false;
-  attachmentsLoaded: boolean = true;
-
-  private attachments: string = null;
-
   constructor(
     private router: Router,
     private adStateStore: AdStateStore,
@@ -80,34 +75,51 @@ export class AdFormComponent implements OnInit, OnChanges{
   }
 
   loadAttachments() {
-    this.attachmentsLoading = true;
-    this.adFormService.loadAttachments(this.files)
+    if (this.errorMsg) this.errorMsg = null;
+
+    let notLoadedFiles = this.files.filter(x => !x.attachment);
+    if (!notLoadedFiles.length) return;
+
+    let filesToLoad = notLoadedFiles.splice(0, 6);
+
+    filesToLoad.forEach(x => x.loading = true);
+    this.changeDetectorRef.markForCheck();
+
+    this.adFormService.loadAttachments(filesToLoad)
       .then(attachments => {
         this.zone.run(() => {
-          if (this.errorMsg) this.errorMsg = null;
+          filesToLoad.forEach((x, index) => {
+            x.loading = false;
+            x.attachment = attachments[index];
+          });
 
-          this.attachments = attachments;
-          this.attachmentsLoading = false;
-          this.attachmentsLoaded = true;
-          this.changeDetectorRef.detectChanges();
+          this.files = this.files.slice();
+          this.changeDetectorRef.markForCheck();
+
+          this.loadAttachments();
         });
       }, error => {
         console.error(error.error_msg);
-        this.attachmentsLoading = false;
-        this.changeDetectorRef.detectChanges();
+        filesToLoad.forEach(x => {
+          x.loading = false;
+        });
+        this.files = this.files.slice();
+        this.changeDetectorRef.markForCheck();
       });
   }
 
   postAd() {
-    if (!this.attachmentsLoaded) {
-      this.errorMsg = 'Вы забыли загрузить фотографии';
+    if (this.files.some(x => x.loading)) {
+      this.errorMsg = 'Фотографии еще загружаются';
       return;
     }
 
     this.loading = true;
     this.changeDetectorRef.detectChanges();
 
-    this.adFormService.post(this.adState, this.attachments)
+    let attachments = this.files ? this.files.map(x => x.attachment) : null;
+
+    this.adFormService.post(this.adState, attachments)
       .then(data => {
         this.zone.run(() => {
           this.adStateStore.dispatch({type: Actions.ResetState});
@@ -160,16 +172,23 @@ export class AdFormComponent implements OnInit, OnChanges{
     });
   }
 
-  onFileChange(files: FileObj[]) {
+  onFilesChange(files: FileObj[]) {
     this.files = files;
 
     if (!files || !files.length) {
-      this.attachments = null;
-      this.attachmentsLoaded = true;
       return;
     }
 
-    let size = Array.from(files)
+    if (files.length > 10) {
+      this.errorMsg = 'Максимум 10 фотографий. Удалите лишние';
+      return;
+    }
+
+    let notLoadedFiles = files.filter(x => !x.attachment);
+
+    if (!notLoadedFiles.length) return;
+
+    let size = notLoadedFiles
       .map(file => file.file.size)
       .reduce((cur, prev) => cur + prev);
 
@@ -178,7 +197,7 @@ export class AdFormComponent implements OnInit, OnChanges{
       return;
     }
 
-    this.attachmentsLoaded = false;
+    this.loadAttachments();
   }
 
   ngOnInit() {

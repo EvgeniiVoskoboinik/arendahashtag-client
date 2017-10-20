@@ -40,11 +40,11 @@ export class AdFormService{
 
   private loadedCities: any[];
 
-  loadAttachments(files: FileObj[]): Promise<any> {
+  loadAttachments(files: FileObj[]): Promise<string[]> {
     return new Promise((resolve, reject) => {
       if (!files || !files.length) return resolve(null);
 
-      let params: GetWallUploadServerReq = {v: 5.68};
+      let params: GetWallUploadServerReq = {v: VK_API_VERSION};
 
       VK.Api.call('photos.getWallUploadServer', params, (uploadServer: BaseRes<GetWallUploadServerRes>) => {
         let formData: FormData = new FormData();
@@ -63,9 +63,8 @@ export class AdFormService{
                const {error, response} = loadedItemsRes;
                if (error) return reject(error);
 
-               const attachments: string = response
-                 .map(loadedItem => `photo${loadedItem.owner_id}_${loadedItem.id}`)
-                 .join(',');
+               const attachments: string[] = response
+                 .map(loadedItem => `photo${loadedItem.owner_id}_${loadedItem.id}`);
                return resolve(attachments);
              });
            }, error => {
@@ -76,13 +75,15 @@ export class AdFormService{
     });
   }
 
-  post(adState: AdState, attachments: string): Promise<any> {
+  post(adState: AdState, attachments: string[]): Promise<any> {
+    let attachmentsString: string = attachments ? attachments.join(',') : null;
+
     return new Promise((resolve, reject) => {
       const createWallPostReq: CreateWallPostReq = {
         owner_id: adState.useUserWall ? this.sharedService.vkUserData.session.mid : GROUP_ID,
         message: this.vkApiService.createWallPostMessage(adState),
         v: VK_API_VERSION,
-        attachments: attachments,
+        attachments: attachmentsString,
       };
 
       VK.Api.call('wall.post', createWallPostReq, data => {

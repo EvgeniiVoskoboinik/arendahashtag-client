@@ -62,6 +62,20 @@
       position: relative;
       display: inline-block;
       box-sizing: content-box;
+      background-color: gray;
+      text-align: center;
+      margin: 0 8px 8px 0;
+
+      .spinner{
+        position: absolute;
+        top: 38.5px;
+        margin: 0;
+        width: 100%;
+
+        & > div {
+          background-color: #196EBD;
+        }
+      }
 
       span.icon-close{
         position: absolute;
@@ -73,10 +87,10 @@
           cursor: pointer;
         }
       }
-    }
 
-    .image-container + .image-container {
-      padding-left: 8px;
+      img:not(.uploaded){
+        opacity: .3;
+      }
     }
   }
 
