@@ -109,7 +109,7 @@ export class AdFormComponent implements OnInit, OnChanges{
   }
 
   postAd() {
-    if (this.files.some(x => x.loading)) {
+    if (this.files && this.files.some(x => x.loading)) {
       this.errorMsg = 'Фотографии еще загружаются';
       return;
     }
